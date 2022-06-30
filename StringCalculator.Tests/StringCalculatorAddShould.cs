@@ -104,7 +104,7 @@ public class StringCalculatorAddShould
 
         // assert
         act.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("negatives are not allowed: -2 -3");
+            .WithMessage("Negative numbers are not allowed: -2 -3");
     }
     
     [Theory]
