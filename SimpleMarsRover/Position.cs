@@ -10,12 +10,22 @@ public class Position
     private const char Left = 'L';
     private const char Right = 'R';
     private const char Move = 'M';
+    
+    private const int MinimumIndex = 0;
+    private const int MaximumIndex = 9;
 
-    public int X { get; set; }
+    public int X { get; private set; }
 
-    public int Y { get; set; } 
+    public int Y { get; private set; } 
 
-    public char Direction { get; set; }
+    public char Direction { get; private set; }
+
+    public Position(int x, int y, char direction)
+    {
+        X = x;
+        Y = y;
+        Direction = direction;
+    }
 
     public Position()
     {
@@ -25,7 +35,7 @@ public class Position
     }
 
     public void Execute(char command)
-    {
+    { 
         switch (command)
         {
             // left
@@ -81,9 +91,9 @@ public class Position
     {
         index++;
         
-        if (index > 9)
+        if (index > MaximumIndex)
         {
-            index = 0;
+            index = MinimumIndex;
         }
 
         return index;
@@ -93,9 +103,9 @@ public class Position
     {
         index--;
         
-        if (index < 0)
+        if (index < MinimumIndex)
         {
-            index = 9;
+            index = MaximumIndex;
         }
 
         return index;

@@ -22,10 +22,7 @@ public class PositionShould
     [InlineAutoMoqData('W', 'R', 'N')]
     public void FaceCorrectDirectionWhenRotated(char initialDirection, char command, char expectedDirection)
     {
-        var sut = new Position
-        {
-            Direction = initialDirection
-        };
+        var sut = new Position(0, 0, initialDirection);
         sut.Execute(command);
         sut.Direction.Should().Be(expectedDirection);
     }
@@ -37,11 +34,7 @@ public class PositionShould
     [InlineAutoMoqData(9, 0)]
     public void MoveYPositionWhenFacingNorth(int initialY, int expectedY)
     {
-        var sut = new Position
-        {
-            Direction = 'N',
-            Y = initialY
-        };
+        var sut = new Position(0, initialY, 'N');
         sut.Execute('M');
         sut.Y.Should().Be(expectedY);
     }
@@ -53,11 +46,7 @@ public class PositionShould
     [InlineAutoMoqData(0, 9)]
     public void MoveYPositionWhenFacingSouth(int initialY, int expectedY)
     {
-        var sut = new Position
-        {
-            Direction = 'S',
-            Y = initialY
-        };
+        var sut = new Position(0, initialY, 'S');
         sut.Execute('M');
         sut.Y.Should().Be(expectedY);
     }
@@ -69,11 +58,7 @@ public class PositionShould
     [InlineAutoMoqData(9, 0)]
     public void MoveXPositionWhenFacingEast(int initialX, int expectedX)
     {
-        var sut = new Position
-        {
-            Direction = 'E',
-            X = initialX
-        };
+        var sut = new Position(initialX, 0, 'E');
         sut.Execute('M');
         sut.X.Should().Be(expectedX);
     }
@@ -85,11 +70,7 @@ public class PositionShould
     [InlineAutoMoqData(0, 9)]
     public void MoveXPositionWhenFacingWest(int initialX, int expectedX)
     {
-        var sut = new Position
-        {
-            Direction = 'W',
-            X = initialX
-        };
+        var sut = new Position(initialX, 0, 'W');
         sut.Execute('M');
         sut.X.Should().Be(expectedX);
     }
