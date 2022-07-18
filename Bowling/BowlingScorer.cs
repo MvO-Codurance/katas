@@ -71,7 +71,7 @@ public class BowlingScorer
                 }
                 else
                 {
-                    frame.Score = 10 + nextFrame.Ball1.NumberOfPins + nextFrame.Ball2.NumberOfPins;   
+                    frame.Score = 10 + GetNextBallsNumberOfPins(gameCard, index, 2); // nextFrame.Ball1.NumberOfPins + nextFrame.Ball2.NumberOfPins;   
                 }
             }
             // spare
@@ -83,7 +83,7 @@ public class BowlingScorer
                 }
                 else
                 {
-                    frame.Score = 10 + nextFrame.Ball1.NumberOfPins;
+                    frame.Score = 10 + GetNextBallsNumberOfPins(gameCard, index, 1); // nextFrame.Ball1.NumberOfPins;
                 }
             }
             // normal
@@ -93,7 +93,7 @@ public class BowlingScorer
             }
         }
 
-        return gameCard.Frames.Sum(f => f.Score) + gameCard.BonusBall1.NumberOfPins + gameCard.BonusBall2.NumberOfPins;
+        return gameCard.Frames.Sum(f => f.Score);
     }
 
     private int ParseNumberOfPins(char? input)
@@ -104,5 +104,47 @@ public class BowlingScorer
         }
         
         return int.Parse(input.ToString());
+    }
+    
+    private int GetNextBallsNumberOfPins(GameCardParser.GameCard gameCard, int currentFrameIndex, int ballsRequired)
+    {
+        int result = 0;
+        int resultCount = 0;
+        
+        // start at the next frame and find non-empty balls; accumulate resultCount NumberOfPins from the frames 
+        for (int index = currentFrameIndex + 1; index < gameCard.Frames.Count; index++)
+        {
+            var frame = gameCard.Frames[index];
+            if (frame.Ball1.Code.HasValue)
+            {
+                result += frame.Ball1.NumberOfPins;
+                resultCount++;
+            }
+            
+            if (resultCount < ballsRequired && frame.Ball2.Code.HasValue)
+            {
+                result += frame.Ball2.NumberOfPins;
+                resultCount++;
+            }
+
+            if (resultCount >= ballsRequired)
+            {
+                return result;
+            }
+        }
+
+        // if we still haven't accumulated enough balls, try the bonus balls as well 
+        if (resultCount < ballsRequired && gameCard.BonusBall1.Code.HasValue)
+        {
+            result += gameCard.BonusBall1.NumberOfPins;
+            resultCount++;
+        }
+        
+        if (resultCount < ballsRequired && gameCard.BonusBall2.Code.HasValue)
+        {
+            result += gameCard.BonusBall2.NumberOfPins;
+        }
+        
+        return result;
     }
 }
