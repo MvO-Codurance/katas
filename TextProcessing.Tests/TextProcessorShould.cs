@@ -54,4 +54,11 @@ public class TextProcessorShould
      {
          new TextProcessor().Analyse(TestText).WordCount.Should().Be(21);
      }
+     
+     [Fact]
+     public void CalculateTheTimeToRead()
+     {
+         new TextProcessor.AnalyseResult(783, new Dictionary<string, int>())
+             .ReadingTime.Should().Be(new TimeSpan(0, 3, 54));
+     }
 }
