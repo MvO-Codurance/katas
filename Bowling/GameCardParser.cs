@@ -5,9 +5,12 @@ public class GameCardParser
     public GameCard Parse(string input)
     {
         if (input == null) throw new ArgumentNullException(nameof(input));
+        
+        const string bonusBallDelimiter = "||";
+        const char frameDelimiter = '|';
 
         // parse bonus balls
-        int framesStringEndPosition = input.IndexOf("||", StringComparison.OrdinalIgnoreCase);
+        int framesStringEndPosition = input.IndexOf(bonusBallDelimiter, StringComparison.OrdinalIgnoreCase);
         string bonusBalls = input.Substring(framesStringEndPosition + 2);
         var bonusBall1 = new Ball();
         var bonusBall2 = new Ball();
@@ -23,7 +26,7 @@ public class GameCardParser
         // parse frames
         string framesString = input.Substring(0, framesStringEndPosition);
         List<Frame> frames = new List<Frame>();
-        foreach (string frameString in framesString.Split('|'))
+        foreach (string frameString in framesString.Split(frameDelimiter))
         {
             var frame = new Frame();
             frame.Ball1.Code = frameString[0];
