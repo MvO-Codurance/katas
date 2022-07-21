@@ -48,15 +48,15 @@ public class GameOfLifeShould
     public void Keep_A_Live_Cell_Alive_When_It_Has_3_Live_Neighbours()
     {
         // arrange
-        var staringBoard = new bool[3, 3];
+        var startingBoard = new bool[3, 3];
         // the center cell is alive
-        staringBoard[1, 1] = true;
+        startingBoard[1, 1] = true;
         // it has 3 live neighbours
-        staringBoard[0, 2] = true;
-        staringBoard[1, 2] = true;
-        staringBoard[2, 2] = true;
+        startingBoard[0, 2] = true;
+        startingBoard[1, 2] = true;
+        startingBoard[2, 2] = true;
         
-        var game = new GameOfLife(staringBoard);
+        var game = new GameOfLife(startingBoard);
         
         // act
         game.NextGen();
@@ -70,13 +70,13 @@ public class GameOfLifeShould
     public void Resurrect_A_Dead_Cell_When_It_Has_3_Live_Neighbours()
     {
         // arrange
-        var staringBoard = new bool[3, 3];
+        var startingBoard = new bool[3, 3];
         // the center cell is already dead and it has 3 live neighbours
-        staringBoard[0, 2] = true;
-        staringBoard[1, 2] = true;
-        staringBoard[2, 2] = true;
+        startingBoard[0, 2] = true;
+        startingBoard[1, 2] = true;
+        startingBoard[2, 2] = true;
         
-        var game = new GameOfLife(staringBoard);
+        var game = new GameOfLife(startingBoard);
         
         // act
         game.NextGen();
@@ -103,11 +103,11 @@ public class GameOfLifeShould
         int edgeCellY)
     {
         // arrange
-        var staringBoard = new bool[3, 3];
+        var startingBoard = new bool[3, 3];
         // it has 1 live neighbour (the center cell)
-        staringBoard[1, 1] = true;
+        startingBoard[1, 1] = true;
 
-        var game = new GameOfLife(staringBoard);
+        var game = new GameOfLife(startingBoard);
         
         // act
         game.NextGen();

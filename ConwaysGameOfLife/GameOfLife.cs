@@ -4,6 +4,21 @@ public class GameOfLife
 {
     public bool[,] Board { get; private set; }
 
+    public GameOfLife(int size)
+    {
+        var rnd = new Random();
+        var startingBoard = new bool[size, size];
+        for (int x = 0; x < size; x++)
+        {
+            for (int y = 0; y < size; y++)
+            {
+                startingBoard[x, y] = rnd.Next(2) == 1;
+            }
+        }
+
+        Board = startingBoard;
+    }
+    
     public GameOfLife(bool[,] board)
     {
         Board = board;
