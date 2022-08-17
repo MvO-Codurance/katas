@@ -2,7 +2,7 @@
 using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 
-namespace ConwaysGameOfLife.Tests
+namespace Bank.Tests
 {
     /// <summary>
     /// Inline auto moq data attribute to allow for inline auto fixture test models as well as Moq based items
@@ -24,6 +24,7 @@ namespace ConwaysGameOfLife.Tests
                 {
                     var fixture = new Fixture();
                     fixture.Customize(new CompositeCustomization(new AutoMoqCustomization()));
+                    fixture.Customize<DateOnly>(composer => composer.FromFactory<DateTime>(DateOnly.FromDateTime));
                     return fixture;
                 })
             {
