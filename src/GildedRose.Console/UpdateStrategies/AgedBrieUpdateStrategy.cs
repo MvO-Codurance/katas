@@ -4,12 +4,16 @@ namespace GildedRose.Console.UpdateStrategies
     {
         public void Update(Item item)
         {
-            const int maxQuality = 50;
-            
-            int qualityIncrement = item.SellIn <= 0 ? 2 : 1;
-            item.Quality = item.Quality <= maxQuality - qualityIncrement ? item.Quality + qualityIncrement : maxQuality;
-            
-            item.SellIn--;
+            if (item.HasExpired())
+            {
+                item.IncrementQualityBy(2);
+            }
+            else
+            {
+                item.IncrementQuality();
+            }
+
+            item.DecrementSellIn();
         }
     }
 }

@@ -4,10 +4,16 @@ namespace GildedRose.Console.UpdateStrategies
     {
         public void Update(Item item)
         {
-            int qualityDecrement = item.SellIn <= 0 ? 2 : 1;
-            item.Quality = item.Quality >= qualityDecrement ? item.Quality - qualityDecrement : 0;
+            if (item.HasExpired())
+            {
+                item.DecrementQualityBy(2);
+            }
+            else
+            {
+                item.DecrementQuality();
+            }
             
-            item.SellIn--;
+            item.DecrementSellIn();
         }
     }
 }
