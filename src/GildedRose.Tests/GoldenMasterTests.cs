@@ -15,14 +15,16 @@ namespace GildedRose.Tests
         private const int FixedSeed = 100;
         private const int NumberOfRandomItems = 2000;
         private const int Minimum = 0;
-        private const int Maximum = 101;
+        private const int Maximum = 50;
         
-        private readonly string[] _itemNames = {"+5 Dexterity Vest",
+        private readonly string[] _itemNames = {
+            "+5 Dexterity Vest",
             "Aged Brie",
             "Elixir of the Mongoose",
             "Sulfuras, Hand of Ragnaros",
             "Backstage passes to a TAFKAL80ETC concert",
-            "Conjured Mana Cake"};
+            "Conjured Mana Cake"
+        };
 
         private readonly Random _random = new Random(FixedSeed);
         private readonly Console.GildedRose _gildedRose = new Console.GildedRose(new ItemUpdateStrategyFactory());
