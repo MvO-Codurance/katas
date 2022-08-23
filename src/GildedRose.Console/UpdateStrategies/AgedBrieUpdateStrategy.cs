@@ -6,10 +6,10 @@ namespace GildedRose.Console.UpdateStrategies
         {
             const int maxQuality = 50;
             
-            item.SellIn--;
-
-            int qualityIncrement = item.SellIn < 0 ? 2 : 1;
+            int qualityIncrement = item.SellIn <= 0 ? 2 : 1;
             item.Quality = item.Quality <= maxQuality - qualityIncrement ? item.Quality + qualityIncrement : maxQuality;
+            
+            item.SellIn--;
         }
     }
 }
