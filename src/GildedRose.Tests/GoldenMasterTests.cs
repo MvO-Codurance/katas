@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using GildedRose.Console;
+using GildedRose.Console.UpdateStrategies;
 using VerifyXunit;
 using Xunit;
 
@@ -13,7 +14,7 @@ namespace GildedRose.Tests
     {
         private const int FixedSeed = 100;
         private const int NumberOfRandomItems = 2000;
-        private const int Minimum = -50;
+        private const int Minimum = 0;
         private const int Maximum = 101;
         
         private readonly string[] _itemNames = {"+5 Dexterity Vest",
@@ -24,7 +25,7 @@ namespace GildedRose.Tests
             "Conjured Mana Cake"};
 
         private readonly Random _random = new Random(FixedSeed);
-        private readonly Console.GildedRose _gildedRose = new Console.GildedRose();
+        private readonly Console.GildedRose _gildedRose = new Console.GildedRose(new ItemUpdateStrategyFactory());
 
         [Fact]
         public Task Should_Generate_Update_Quality_Output()

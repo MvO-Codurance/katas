@@ -46,6 +46,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateStrategies\IItemUpdateStrategy.cs" />
+    <Compile Include="UpdateStrategies\ItemUpdateStrategyFactory.cs" />
     <Compile Include="UpdateStrategies\StandardItemUpdateStrategy.cs" />
   </ItemGroup>
   <ItemGroup>

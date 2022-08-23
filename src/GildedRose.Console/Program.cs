@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GildedRose.Console.UpdateStrategies;
 
 namespace GildedRose.Console
 {
@@ -36,7 +37,7 @@ namespace GildedRose.Console
 
         private void UpdateQuality()
         {
-            var gildedRose = new GildedRose();
+            var gildedRose = new GildedRose(new ItemUpdateStrategyFactory());
             gildedRose.UpdateQuality(Items);
         }
     }
