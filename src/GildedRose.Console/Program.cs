@@ -4,11 +4,15 @@ namespace GildedRose.Console
 {
     class Program
     {
+        IList<Item> Items; // can't change this property
+        
         static void Main(string[] args)
         {
             System.Console.WriteLine("OMGHAI!");
 
-            IList<Item> items = new List<Item>
+            var app = new Program()
+            {
+                Items = new List<Item>
                 {
                     new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
                     new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
@@ -21,12 +25,19 @@ namespace GildedRose.Console
                         Quality = 20
                     },
                     new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
-                };
+                }
 
-            GildedRose gildedRose = new GildedRose();
-            gildedRose.UpdateQuality(items);
+            };
+
+            app.UpdateQuality();
 
             System.Console.ReadKey();
+        }
+
+        private void UpdateQuality()
+        {
+            var gildedRose = new GildedRose();
+            gildedRose.UpdateQuality(Items);
         }
     }
 }

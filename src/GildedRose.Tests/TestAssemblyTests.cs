@@ -64,7 +64,7 @@ namespace GildedRose.Tests
             var builder = new StringBuilder();
             foreach (var item in items)
             {
-                builder.AppendLine(item.ToString());
+                builder.AppendLine($"Item [name={item.Name}, sellIn={item.SellIn}, quality={item.Quality}]");
             }
             return builder.ToString();
         }
