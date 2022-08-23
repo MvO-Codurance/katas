@@ -12,6 +12,9 @@ namespace GildedRose.Console.UpdateStrategies
                 case "Sulfuras, Hand of Ragnaros":
                     return new LegendaryItemUpdateStrategy();
                 
+                case "Backstage passes to a TAFKAL80ETC concert":
+                    return new BackstagePassUpdateStrategy();
+                
                 case "+5 Dexterity Vest":
                 case "Elixir of the Mongoose":
                     return new StandardItemUpdateStrategy();

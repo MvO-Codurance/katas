@@ -13,6 +13,7 @@ namespace GildedRose.Tests
         [InlineAutoData("Elixir of the Mongoose", typeof(StandardItemUpdateStrategy))]
         [InlineAutoData("Aged Brie", typeof(AgedBrieUpdateStrategy))]
         [InlineAutoData("Sulfuras, Hand of Ragnaros", typeof(LegendaryItemUpdateStrategy))]
+        [InlineAutoData("Backstage passes to a TAFKAL80ETC concert", typeof(BackstagePassUpdateStrategy))]
         public void Return_The_Correct_Strategy(string name, Type strategyType)
         {
             // arrange

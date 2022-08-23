@@ -139,5 +139,51 @@ namespace GildedRose.Tests
             // assert
             item.SellIn.Should().Be(initialSellIn);
         }
+        
+        [Theory]
+        [InlineAutoData(11, 10, 11)]
+        [InlineAutoData(10, 10, 12)]
+        [InlineAutoData(6, 10, 12)]
+        [InlineAutoData(5, 10, 13)]
+        [InlineAutoData(1, 10, 13)]
+        [InlineAutoData(0, 0, 0)]
+        [InlineAutoData(-1, 0, 0)]
+        public void Update_Quality_For_Backstage_Pass(
+            int initialSellIn,
+            int initialQuality,
+            int expectedQuality,
+            Item item,
+            BackstagePassUpdateStrategy sut)
+        {
+            // arrange
+            item.SellIn = initialSellIn;
+            item.Quality = initialQuality;
+            
+            // act
+            sut.Update(item);
+
+            // assert
+            item.Quality.Should().Be(expectedQuality);
+        }
+        
+        [Theory]
+        [InlineAutoData(10, 9)]
+        [InlineAutoData(1, 0)]
+        [InlineAutoData(0, -1)]
+        public void Decrement_SellIn_For_Backstaage_Pass(
+            int initialSellIn,
+            int expectedSellIn,
+            Item item,
+            BackstagePassUpdateStrategy sut)
+        {
+            // arrange
+            item.SellIn = initialSellIn;
+            
+            // act
+            sut.Update(item);
+
+            // assert
+            item.SellIn.Should().Be(expectedSellIn);
+        }
     }
 }
