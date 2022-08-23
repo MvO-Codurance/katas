@@ -11,7 +11,9 @@ namespace GildedRose.Tests
         [Theory]
         [InlineAutoData("+5 Dexterity Vest", typeof(StandardItemUpdateStrategy))]
         [InlineAutoData("Elixir of the Mongoose", typeof(StandardItemUpdateStrategy))]
-        public void Return_The_Standard_Strategy_For_Standard_Items(string name, Type strategyType)
+        [InlineAutoData("Aged Brie", typeof(AgedBrieUpdateStrategy))]
+        [InlineAutoData("Sulfuras, Hand of Ragnaros", typeof(LegendaryItemUpdateStrategy))]
+        public void Return_The_Correct_Strategy(string name, Type strategyType)
         {
             // arrange
             var sut = new ItemUpdateStrategyFactory();
