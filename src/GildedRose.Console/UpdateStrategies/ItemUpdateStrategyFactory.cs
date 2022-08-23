@@ -15,12 +15,11 @@ namespace GildedRose.Console.UpdateStrategies
                 case "Backstage passes to a TAFKAL80ETC concert":
                     return new BackstagePassUpdateStrategy();
                 
-                case "+5 Dexterity Vest":
-                case "Elixir of the Mongoose":
-                    return new StandardItemUpdateStrategy();
+                case "Conjured Mana Cake":
+                    return new ConjuredItemUpdateStrategy();
                 
                 default:
-                    return null;
+                    return new StandardItemUpdateStrategy();
             }
         }
     }
