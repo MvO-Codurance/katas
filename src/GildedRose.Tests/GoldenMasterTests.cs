@@ -9,7 +9,7 @@ using Xunit;
 namespace GildedRose.Tests
 {
     [UsesVerify]
-    public class TestAssemblyTests
+    public class GoldenMasterTests
     {
         private const int FixedSeed = 100;
         private const int NumberOfRandomItems = 2000;
