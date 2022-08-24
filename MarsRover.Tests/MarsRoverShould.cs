@@ -17,11 +17,14 @@ public class MarsRoverShould
         new Rover().Execute("MMMMMMMMMM").Should().Be("0:0:N");
     }
     
-    // TODO
-    // [Fact]
+    [Fact]
     public void Given_Grid_With_Obstacles_With_Input_MMMM_Give_Output_O_0_2_N()
     {
-        new Rover().Execute("MMMM").Should().Be("O:0:2:N");
+        var obstacles = new List<Position>
+        {
+            new Position(0, 3)
+        };
+        new Rover(obstacles).Execute("MMMM").Should().Be("O:0:2:N");
     }
 
     [Fact]
