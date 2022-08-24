@@ -4,7 +4,11 @@ namespace GildedRose.Console.UpdateStrategies
     {
         public void Update(Item item)
         {
-            if (item.SellIn <= 5)
+            if (item.HasExpired())
+            {
+                item.Quality = 0;
+            }
+            else if (item.SellIn <= 5)
             {
                 item.IncrementQualityBy(3);
             }
@@ -16,12 +20,7 @@ namespace GildedRose.Console.UpdateStrategies
             {
                 item.IncrementQuality();
             }
-            
-            if (item.HasExpired())
-            {
-                item.Quality = 0;
-            }
-            
+
             item.DecrementSellIn();
         }
     }
