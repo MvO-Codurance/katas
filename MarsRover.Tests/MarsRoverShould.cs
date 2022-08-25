@@ -20,11 +20,12 @@ public class MarsRoverShould
     [Fact]
     public void Given_Grid_With_Obstacles_With_Input_MMMM_Give_Output_O_0_2_N()
     {
-        var obstacles = new List<Position>
+        var obstacles = new List<Coordinate>
         {
-            new Position(0, 3)
+            new Coordinate(0, 3)
         };
-        new Rover(obstacles).Execute("MMMM").Should().Be("O:0:2:N");
+        var grid = new Grid(obstacles);
+        new Rover(grid).Execute("MMMM").Should().Be("O:0:2:N");
     }
 
     [Fact]
@@ -36,42 +37,7 @@ public class MarsRoverShould
     [Fact]
     public void Be_At_Correct_Position_When_Given_Initial_Position()
     {
-        new Rover(2, 3, Direction.S).ToString().Should().Be("2:3:S");
-    }
-    
-    [Fact]
-    public void Turn_To_Correct_Direction()
-    {
-        var rover = new Rover();
-
-        rover.Execute("L").Should().Be("0:0:W");
-        rover.Execute("L").Should().Be("0:0:S");
-        rover.Execute("L").Should().Be("0:0:E");
-        rover.Execute("L").Should().Be("0:0:N");
-        
-        rover.Execute("R").Should().Be("0:0:E");
-        rover.Execute("R").Should().Be("0:0:S");
-        rover.Execute("R").Should().Be("0:0:W");
-        rover.Execute("R").Should().Be("0:0:N");
-    }
-    
-    [Theory]
-    [InlineData(0, 0, Direction.N, "0:1:N")]
-    [InlineData(0, 1, Direction.N, "0:2:N")]
-    [InlineData(0, 9, Direction.N, "0:0:N")]
-    [InlineData(0, 0, Direction.S, "0:9:S")]
-    [InlineData(0, 2, Direction.S, "0:1:S")]
-    [InlineData(0, 9, Direction.S, "0:8:S")]
-    [InlineData(0, 0, Direction.E, "1:0:E")]
-    [InlineData(1, 0, Direction.E, "2:0:E")]
-    [InlineData(9, 0, Direction.E, "0:0:E")]
-    [InlineData(0, 0, Direction.W, "9:0:W")]
-    [InlineData(2, 0, Direction.W, "1:0:W")]
-    [InlineData(9, 0, Direction.W, "8:0:W")]
-    public void Move_To_Correct_Position(int initialX, int initialY, Direction initialDirection, string expectedPosition)
-    {
-        var rover = new Rover(initialX, initialY, initialDirection);
-        rover.Execute("M").Should().Be(expectedPosition);
+        new Rover(2, 3, CompassHeading.S).ToString().Should().Be("2:3:S");
     }
     
     [Fact]

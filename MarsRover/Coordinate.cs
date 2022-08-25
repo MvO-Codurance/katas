@@ -1,8 +1,8 @@
 namespace MarsRover;
 
-public record Position()
+public record Coordinate()
 {
-    public Position(int x, int y) : this()
+    public Coordinate(int x, int y) : this()
     {
         X = x;
         Y = y;

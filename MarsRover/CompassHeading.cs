@@ -1,6 +1,6 @@
 namespace MarsRover;
 
-public enum Direction
+public enum CompassHeading
 {
     N,
     E,
