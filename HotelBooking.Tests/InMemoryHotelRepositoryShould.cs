@@ -32,10 +32,9 @@ public class InMemoryHotelRepositoryShould
         // arrange
         
         // act
-        Action act = () => sut.AddHotel(hotel);
+        sut.AddHotel(hotel);
 
         // assert
-        act.Should().NotThrow();
         sut.FindHotelBy(hotel.Id).Should().BeEquivalentTo(hotel);
     }
     

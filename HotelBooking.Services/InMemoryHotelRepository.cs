@@ -14,12 +14,7 @@ public class InMemoryHotelRepository : IHotelRepository
 
     public Hotel? FindHotelBy(Guid hotelId)
     {
-        if (_hotels.TryGetValue(hotelId, out var hotel))
-        {
-            return hotel;
-        }
-
-        return null;
+        return _hotels.TryGetValue(hotelId, out var hotel) ? hotel : null;
     }
 
     public void UpsertRoom(Guid hotelId, string roomNumber, RoomType roomType)
