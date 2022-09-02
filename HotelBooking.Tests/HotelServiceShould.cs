@@ -42,11 +42,9 @@ public class HotelServiceShould
         hotelRepository.FindHotelBy(Arg.Any<Guid>()).Returns(null as Hotel);
         
         // act
-        Action act = () => sut.AddHotel(hotel.Id, hotel.Name);
+        sut.AddHotel(hotel.Id, hotel.Name);
 
         // assert
-        act.Should().NotThrow();
-
         hotelRepository.Received(1).FindHotelBy(hotel.Id);
         hotelRepository.Received(1).AddHotel(Arg.Is<Hotel>(x => 
             x.Id == hotel.Id &&
@@ -123,11 +121,9 @@ public class HotelServiceShould
         hotelRepository.FindHotelBy(Arg.Any<Guid>()).Returns(hotel);
         
         // act
-        Action act = () => sut.SetRoom(hotel.Id, roomNumber, roomType);
+        sut.SetRoom(hotel.Id, roomNumber, roomType);
 
         // assert
-        act.Should().NotThrow();
-        
         hotelRepository.Received(1).FindHotelBy(hotel.Id);
         hotelRepository.Received(1).UpsertRoom(hotel.Id, roomNumber, roomType);
     }

@@ -8,5 +8,5 @@ public interface IHotelService
     
     void SetRoom(Guid hotelId, string number, RoomType roomType);
             
-    Hotel FindHotelBy(Guid hotelId); 
+    Hotel? FindHotelBy(Guid hotelId); 
 }

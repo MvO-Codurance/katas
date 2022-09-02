@@ -6,7 +6,7 @@ public interface IHotelRepository
 {
     public void AddHotel(Hotel hotel);
     
-    Hotel FindHotelBy(Guid hotelId);
+    Hotel? FindHotelBy(Guid hotelId);
 
     void UpsertRoom(Guid hotelId, string roomNumber, RoomType roomType);
 }

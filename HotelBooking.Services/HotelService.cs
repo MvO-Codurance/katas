@@ -38,7 +38,7 @@ public class HotelService : IHotelService
         _hotelRepository.UpsertRoom(hotelId, number, roomType);
     }
 
-    public Hotel FindHotelBy(Guid hotelId)
+    public Hotel? FindHotelBy(Guid hotelId)
     {
         return _hotelRepository.FindHotelBy(hotelId);
     }
