@@ -27,4 +27,9 @@ public class CompanyService : ICompanyService
     {
         _companyRepository.DeleteEmployee(employeeId);
     }
+
+    public Employee? FindEmployeeBy(Guid employeeId)
+    {
+        return _companyRepository.FindEmployeeBy(employeeId);
+    }
 }
