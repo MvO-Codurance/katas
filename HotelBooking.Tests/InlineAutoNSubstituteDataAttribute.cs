@@ -24,6 +24,7 @@ namespace HotelBooking.Tests
                 {
                     var fixture = new Fixture();
                     fixture.Customize(new CompositeCustomization(new AutoNSubstituteCustomization()));
+                    fixture.Customize<DateOnly>(composer => composer.FromFactory<DateTime>(DateOnly.FromDateTime));
                     return fixture;
                 })
             {
