@@ -1,13 +1,13 @@
 using HotelBooking.Abstractions;
 using HotelBooking.Models;
 
-namespace HotelBooking.Services;
+namespace HotelBooking.Services.BookingValidators;
 
-public class BookingValidator : IBookingValidator
+public class HotelValidator : IBookingValidator
 {
     private readonly IHotelService _hotelService;
 
-    public BookingValidator(IHotelService hotelService)
+    public HotelValidator(IHotelService hotelService)
     {
         _hotelService = hotelService ?? throw new ArgumentNullException(nameof(hotelService));
     }
@@ -16,21 +16,19 @@ public class BookingValidator : IBookingValidator
     {
         var result = new BookingValidationResult();
         
-        // checkout is later than checkin?
-        if (booking.CheckOutDate.DayNumber - booking.CheckInDate.DayNumber < 1)
-        {
-            result.Errors.Add("Check out date must be later than check in date.");
-        }
-        
-        // hotel exists and provides requested room type?
         var hotel = _hotelService.FindHotelBy(booking.HotelId);
         if (hotel == null)
         {
             result.Errors.Add($"Hotel with id {booking.HotelId} does not exist.");
         }
+        else
+        {
+            if (hotel.Rooms.Values.Any(x => x.Type == booking.RoomType) == false)
+            {
+                result.Errors.Add($"Hotel with id {booking.HotelId} does not provide rooms of type {booking.RoomType}.");
+            }
+        }
         
-        // TODO
-
         return result;
     }
 }
