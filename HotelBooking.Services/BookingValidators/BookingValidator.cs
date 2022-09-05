@@ -12,6 +12,11 @@ public class BookingValidator : IBookingValidator
         HotelValidator hotelValidator,
         BookingPolicyValidator bookingPolicyValidator)
     {
+        // TODO add validators for:
+        // Booking should only be allowed if there is at least one room type available during the whole booking period.
+        // Keep track of all bookings. E.g. If hotel has 5 standard rooms, we should have no more than 5 bookings in the same day.
+        // Hotel rooms can be booked many times as long as there are no conflicts with the dates.
+        
         // pull this list from configuration?
         // or caller provides it?
         _validators = new List<IBookingValidator>
