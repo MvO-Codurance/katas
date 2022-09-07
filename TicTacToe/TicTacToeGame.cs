@@ -2,18 +2,15 @@ namespace TicTacToe;
 
 public class TicTacToeGame
 {
-    private const char X = 'X';
-    private const char O = 'O';
-    
-    public char?[,] Board { get; private set; }
-    public char CurrentPlayer { get; private set; }
+    public Board Board { get; }
+    public Player CurrentPlayer { get; private set; }
 
     private PlayResult _lastPlayResult;
     
     public TicTacToeGame()
     {
-        Board = new char?[3, 3];
-        CurrentPlayer = X;
+        Board = new Board();
+        CurrentPlayer = Player.X;
     }
 
     public PlayResult Play(Coordinate coordinate)
@@ -23,18 +20,17 @@ public class TicTacToeGame
             return _lastPlayResult;
         }
         
-        if (SquareAlreadyPlayed(coordinate))
+        if (Board.HasSquareBeenPlayed(coordinate))
         {
             _lastPlayResult = PlayResult.Rejected;
             return _lastPlayResult;
         }
         
-        // make the play
-        Board[coordinate.X, coordinate.Y] = CurrentPlayer;
+        Board.PlaySquare(coordinate, CurrentPlayer);
 
         if (ColumnWin() || RowWin() || BottomLeftTopRightWin() || TopLeftBottomRightWin())
         {
-            _lastPlayResult = CurrentPlayer == X ? PlayResult.PlayerXWins : PlayResult.PlayerOWins;
+            _lastPlayResult = CurrentPlayer == Player.X ? PlayResult.PlayerXWins : PlayResult.PlayerOWins;
             return _lastPlayResult;
         }
         
@@ -45,7 +41,7 @@ public class TicTacToeGame
         }
 
         // toggle player
-        CurrentPlayer = CurrentPlayer == X ? O : X;
+        CurrentPlayer = CurrentPlayer == Player.X ? Player.O : Player.X;
         
         // continue game
         _lastPlayResult = PlayResult.Accepted;
@@ -55,11 +51,6 @@ public class TicTacToeGame
     private bool HasGameAlreadyFinished()
     {
         return _lastPlayResult is PlayResult.Draw or PlayResult.PlayerXWins or PlayResult.PlayerOWins;
-    }
-
-    private bool SquareAlreadyPlayed(Coordinate coordinate)
-    {
-        return Board[coordinate.X, coordinate.Y].HasValue;
     }
 
     private bool ColumnWin()
@@ -100,11 +91,11 @@ public class TicTacToeGame
 
     private bool IsWinningSequence(Coordinate square1, Coordinate square2, Coordinate square3)
     {
-        return Board[square1.X, square1.Y].HasValue && 
-               Board[square2.X, square2.Y].HasValue &&
-               Board[square3.X, square3.Y].HasValue &&
-               (Board[square1.X, square1.Y]!.Value == Board[square2.X, square2.Y]!.Value &&
-                Board[square2.X, square2.Y]!.Value == Board[square3.X, square3.Y]!.Value);
+        return Board.HasSquareBeenPlayed(square1) && 
+               Board.HasSquareBeenPlayed(square2) &&
+               Board.HasSquareBeenPlayed(square3) &&
+               (Board.Square(square1)!.Value == Board.Square(square2)!.Value &&
+                Board.Square(square2)!.Value == Board.Square(square3)!.Value);
     }
 
     private bool IsDraw()
@@ -113,7 +104,7 @@ public class TicTacToeGame
         {
             for (int y = 0; y < 3; y++)
             {
-                if (!Board[x, y].HasValue)
+                if (!Board.HasSquareBeenPlayed(new Coordinate(x, y)))
                 {
                     return false;
                 }

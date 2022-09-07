@@ -6,15 +6,9 @@ namespace TicTacToe.Tests;
 public class TicTacToeGameShould
 {
     [Fact]
-    public void Start_A_New_Game_With_An_Empty_Board()
-    {
-        new TicTacToeGame().Board.Should().BeEquivalentTo(new char?[3, 3]);
-    }
-    
-    [Fact]
     public void Start_A_New_Game_With_First_Player_As_X()
     {
-        new TicTacToeGame().CurrentPlayer.Should().Be('X');
+        new TicTacToeGame().CurrentPlayer.Should().Be(Player.X);
     }
     
     [Fact]
@@ -23,16 +17,16 @@ public class TicTacToeGameShould
         var game = new TicTacToeGame();
 
         game.Play(new Coordinate(0, 0));
-        game.CurrentPlayer.Should().Be('O');
+        game.CurrentPlayer.Should().Be(Player.O);
         
         game.Play(new Coordinate(2, 2));
-        game.CurrentPlayer.Should().Be('X');
+        game.CurrentPlayer.Should().Be(Player.X);
         
         game.Play(new Coordinate(1, 1));
-        game.CurrentPlayer.Should().Be('O');
+        game.CurrentPlayer.Should().Be(Player.O);
         
         game.Play(new Coordinate(0, 1));
-        game.CurrentPlayer.Should().Be('X');
+        game.CurrentPlayer.Should().Be(Player.X);
     }
     
     [Fact]
@@ -40,11 +34,13 @@ public class TicTacToeGameShould
     {
         var game = new TicTacToeGame();
 
-        game.Play(new Coordinate(0, 0));
-        game.Board[0, 0].Should().Be('X');
+        var coordinate = new Coordinate(0, 0);
+        game.Play(coordinate);
+        game.Board.Square(coordinate).Should().Be(Player.X);
         
-        game.Play(new Coordinate(0, 1));
-        game.Board[0, 1].Should().Be('O');
+        coordinate = new Coordinate(0, 1);
+        game.Play(coordinate);
+        game.Board.Square(coordinate).Should().Be(Player.O);
     }
     
     [Fact]
@@ -52,11 +48,12 @@ public class TicTacToeGameShould
     {
         var game = new TicTacToeGame();
 
-        game.Play(new Coordinate(0, 0)).Should().Be(PlayResult.Accepted);
-        game.Board[0, 0].Should().Be('X');
+        var coordinate = new Coordinate(0, 0);
+        game.Play(coordinate).Should().Be(PlayResult.Accepted);
+        game.Board.Square(coordinate).Should().Be(Player.X);
         
-        game.Play(new Coordinate(0, 0)).Should().Be(PlayResult.Rejected);
-        game.Board[0, 0].Should().Be('X');
+        game.Play(coordinate).Should().Be(PlayResult.Rejected);
+        game.Board.Square(coordinate).Should().Be(Player.X);
     }
     
     [Fact]
