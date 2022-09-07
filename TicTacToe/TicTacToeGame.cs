@@ -20,14 +20,12 @@ public class TicTacToeGame
 
     public PlayResult Play(int x, int y)
     {
-        // game already finished?
-        if (_lastPlayResult is PlayResult.Draw or PlayResult.PlayerXWins or PlayResult.PlayerOWins)
+        if (HasGameAlreadyFinished())
         {
             return _lastPlayResult;
         }
         
-        // square already played?
-        if (Board[x, y].HasValue)
+        if (SquareAlreadyPlayed(x, y))
         {
             _lastPlayResult = PlayResult.Rejected;
             return _lastPlayResult;
@@ -36,45 +34,13 @@ public class TicTacToeGame
         // make the play
         Board[x, y] = CurrentPlayer;
 
-        // check for a winner
-        PlayResult ReturnWinningResult()
+        if (ColumnWin() || RowWin() || BottomLeftTopRightWin() || TopLeftBottomRightWin())
         {
             _lastPlayResult = CurrentPlayer == X ? PlayResult.PlayerXWins : PlayResult.PlayerOWins;
             return _lastPlayResult;
         }
-
-        // column win?
-        for (int columnIndex = 0; columnIndex < 3; columnIndex++)
-        {
-            if (IsWinningSequence((columnIndex, 0), (columnIndex, 1), (columnIndex, 2)))
-            {
-                return ReturnWinningResult();
-            }    
-        }
         
-        // row win?
-        for (int rowIndex = 0; rowIndex < 3; rowIndex++)
-        {
-            if (IsWinningSequence((0, rowIndex), (1, rowIndex), (2, rowIndex)))
-            {
-                return ReturnWinningResult();
-            }
-        }
-        
-        // diagonal (bottom left -> top right) win?
-        if (IsWinningSequence((0, 0), (1, 1), (2, 2)))
-        {
-            return ReturnWinningResult();
-        }
-        
-        // diagonal (top left -> bottom right) win?
-        if (IsWinningSequence((0, 2), (1, 1), (2, 0)))
-        {
-            return ReturnWinningResult();
-        }
-        
-        // draw?
-        if (IsBoardFull())
+        if (IsDraw())
         {
             _lastPlayResult = PlayResult.Draw;
             return _lastPlayResult;
@@ -83,8 +49,55 @@ public class TicTacToeGame
         // toggle player
         CurrentPlayer = CurrentPlayer == X ? O : X;
         
+        // continue game
         _lastPlayResult = PlayResult.Accepted;
         return _lastPlayResult;
+    }
+
+    private bool HasGameAlreadyFinished()
+    {
+        return _lastPlayResult is PlayResult.Draw or PlayResult.PlayerXWins or PlayResult.PlayerOWins;
+    }
+
+    private bool SquareAlreadyPlayed(int x, int y)
+    {
+        return Board[x, y].HasValue;
+    }
+
+    private bool ColumnWin()
+    {
+        for (int columnIndex = 0; columnIndex < 3; columnIndex++)
+        {
+            if (IsWinningSequence((columnIndex, 0), (columnIndex, 1), (columnIndex, 2)))
+            {
+                return true;
+            }    
+        }
+
+        return false;
+    }
+
+    private bool RowWin()
+    {
+        for (int rowIndex = 0; rowIndex < 3; rowIndex++)
+        {
+            if (IsWinningSequence((0, rowIndex), (1, rowIndex), (2, rowIndex)))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool BottomLeftTopRightWin()
+    {
+        return IsWinningSequence((0, 0), (1, 1), (2, 2));
+    }
+
+    private bool TopLeftBottomRightWin()
+    {
+        return IsWinningSequence((0, 2), (1, 1), (2, 0));
     }
 
     private bool IsWinningSequence((int x, int y) square1, (int x, int y) square2, (int x, int y) square3)
@@ -96,7 +109,7 @@ public class TicTacToeGame
                 Board[square2.x, square2.y].Value == Board[square3.x, square3.y].Value);
     }
 
-    private bool IsBoardFull()
+    private bool IsDraw()
     {
         for (int x = 0; x < 3; x++)
         {
