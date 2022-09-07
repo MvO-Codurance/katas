@@ -1,5 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
-
 namespace TicTacToe;
 
 public class TicTacToeGame
@@ -18,21 +16,21 @@ public class TicTacToeGame
         CurrentPlayer = X;
     }
 
-    public PlayResult Play(int x, int y)
+    public PlayResult Play(Coordinate coordinate)
     {
         if (HasGameAlreadyFinished())
         {
             return _lastPlayResult;
         }
         
-        if (SquareAlreadyPlayed(x, y))
+        if (SquareAlreadyPlayed(coordinate))
         {
             _lastPlayResult = PlayResult.Rejected;
             return _lastPlayResult;
         }
         
         // make the play
-        Board[x, y] = CurrentPlayer;
+        Board[coordinate.X, coordinate.Y] = CurrentPlayer;
 
         if (ColumnWin() || RowWin() || BottomLeftTopRightWin() || TopLeftBottomRightWin())
         {
@@ -59,16 +57,16 @@ public class TicTacToeGame
         return _lastPlayResult is PlayResult.Draw or PlayResult.PlayerXWins or PlayResult.PlayerOWins;
     }
 
-    private bool SquareAlreadyPlayed(int x, int y)
+    private bool SquareAlreadyPlayed(Coordinate coordinate)
     {
-        return Board[x, y].HasValue;
+        return Board[coordinate.X, coordinate.Y].HasValue;
     }
 
     private bool ColumnWin()
     {
         for (int columnIndex = 0; columnIndex < 3; columnIndex++)
         {
-            if (IsWinningSequence((columnIndex, 0), (columnIndex, 1), (columnIndex, 2)))
+            if (IsWinningSequence(new Coordinate(columnIndex, 0), new Coordinate(columnIndex, 1), new Coordinate(columnIndex, 2)))
             {
                 return true;
             }    
@@ -81,7 +79,7 @@ public class TicTacToeGame
     {
         for (int rowIndex = 0; rowIndex < 3; rowIndex++)
         {
-            if (IsWinningSequence((0, rowIndex), (1, rowIndex), (2, rowIndex)))
+            if (IsWinningSequence(new Coordinate(0, rowIndex), new Coordinate(1, rowIndex), new Coordinate(2, rowIndex)))
             {
                 return true;
             }
@@ -92,21 +90,21 @@ public class TicTacToeGame
 
     private bool BottomLeftTopRightWin()
     {
-        return IsWinningSequence((0, 0), (1, 1), (2, 2));
+        return IsWinningSequence(new Coordinate(0, 0), new Coordinate(1, 1), new Coordinate(2, 2));
     }
 
     private bool TopLeftBottomRightWin()
     {
-        return IsWinningSequence((0, 2), (1, 1), (2, 0));
+        return IsWinningSequence(new Coordinate(0, 2), new Coordinate(1, 1), new Coordinate(2, 0));
     }
 
-    private bool IsWinningSequence((int x, int y) square1, (int x, int y) square2, (int x, int y) square3)
+    private bool IsWinningSequence(Coordinate square1, Coordinate square2, Coordinate square3)
     {
-        return Board[square1.x, square1.y].HasValue && 
-               Board[square2.x, square2.y].HasValue &&
-               Board[square3.x, square3.y].HasValue &&
-               (Board[square1.x, square1.y].Value == Board[square2.x, square2.y].Value &&
-                Board[square2.x, square2.y].Value == Board[square3.x, square3.y].Value);
+        return Board[square1.X, square1.Y].HasValue && 
+               Board[square2.X, square2.Y].HasValue &&
+               Board[square3.X, square3.Y].HasValue &&
+               (Board[square1.X, square1.Y]!.Value == Board[square2.X, square2.Y]!.Value &&
+                Board[square2.X, square2.Y]!.Value == Board[square3.X, square3.Y]!.Value);
     }
 
     private bool IsDraw()
