@@ -32,31 +32,6 @@ namespace Tennis
                 return $"{GetPointsScore(_player1Points)}-{GetPointsScore(_player2Points)}";
             }
 
-            if (_player1Points > _player2Points && _player1Points < 4)
-            {
-                if (_player1Points == 2)
-                    p1res = "Thirty";
-                if (_player1Points == 3)
-                    p1res = "Forty";
-                if (_player2Points == 1)
-                    p2res = "Fifteen";
-                if (_player2Points == 2)
-                    p2res = "Thirty";
-                score = p1res + "-" + p2res;
-            }
-            if (_player2Points > _player1Points && _player2Points < 4)
-            {
-                if (_player2Points == 2)
-                    p2res = "Thirty";
-                if (_player2Points == 3)
-                    p2res = "Forty";
-                if (_player1Points == 1)
-                    p1res = "Fifteen";
-                if (_player1Points == 2)
-                    p1res = "Thirty";
-                score = p1res + "-" + p2res;
-            }
-
             if (_player1Points > _player2Points && _player2Points >= 3)
             {
                 score = "Advantage player1";
