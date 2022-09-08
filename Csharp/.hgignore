@@ -1,0 +1,9 @@
+syntax: glob
+packages/*
+ParallelAndNarrowChange/obj/*
+ParallelAndNarrowChange/bin/*
+_NCrunch_ParallelAndNarrowChange/ParallelAndNarrowChange.crunchsolution.cache
+ParallelAndNarrowChange/ParallelAndNarrowChange.v2.ncrunchproject
+ParallelAndNarrowChange.v12.suo
+ParallelAndNarrowChange.ncrunchsolution.user
+ParallelAndNarrowChange.v2.ncrunchsolution

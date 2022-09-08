@@ -1,0 +1,285 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AE2904441CC14AAD003103CC /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2904431CC14AAD003103CC /* AuthenticationService.swift */; };
+		AE2904461CC14B34003103CC /* ShoppingCarTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2904451CC14B34003103CC /* ShoppingCarTest.swift */; };
+		AE2904481CC14C3F003103CC /* ShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2904471CC14C3F003103CC /* ShoppingCart.swift */; };
+		AE4F3A6B1CC1456400780A50 /* AuthenticatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4F3A6A1CC1456400780A50 /* AuthenticatorTest.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AE2904431CC14AAD003103CC /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		AE2904451CC14B34003103CC /* ShoppingCarTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCarTest.swift; sourceTree = "<group>"; };
+		AE2904471CC14C3F003103CC /* ShoppingCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCart.swift; sourceTree = "<group>"; };
+		AE4F3A5F1CC1443F00780A50 /* ParallelChangeTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParallelChangeTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE4F3A631CC1444000780A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE4F3A6A1CC1456400780A50 /* AuthenticatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorTest.swift; sourceTree = "<group>"; };
+		AE4F3A6C1CC1457F00780A50 /* ParallelChangeTest-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ParallelChangeTest-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AE4F3A5C1CC1443F00780A50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AE4F3A461CC1430900780A50 = {
+			isa = PBXGroup;
+			children = (
+				AE4F3A601CC1444000780A50 /* ParallelChange */,
+				AE4F3A501CC1430900780A50 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AE4F3A501CC1430900780A50 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AE4F3A5F1CC1443F00780A50 /* ParallelChangeTest.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AE4F3A601CC1444000780A50 /* ParallelChange */ = {
+			isa = PBXGroup;
+			children = (
+				AE4F3A6C1CC1457F00780A50 /* ParallelChangeTest-Bridging-Header.h */,
+				AE4F3A631CC1444000780A50 /* Info.plist */,
+				AE4F3A6A1CC1456400780A50 /* AuthenticatorTest.swift */,
+				AE2904431CC14AAD003103CC /* AuthenticationService.swift */,
+				AE2904451CC14B34003103CC /* ShoppingCarTest.swift */,
+				AE2904471CC14C3F003103CC /* ShoppingCart.swift */,
+			);
+			name = ParallelChange;
+			path = ParallelChangeTest;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AE4F3A5E1CC1443F00780A50 /* ParallelChangeTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE4F3A641CC1444000780A50 /* Build configuration list for PBXNativeTarget "ParallelChangeTest" */;
+			buildPhases = (
+				AE4F3A5B1CC1443F00780A50 /* Sources */,
+				AE4F3A5C1CC1443F00780A50 /* Frameworks */,
+				AE4F3A5D1CC1443F00780A50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ParallelChangeTest;
+			productName = ParallelChangeTest;
+			productReference = AE4F3A5F1CC1443F00780A50 /* ParallelChangeTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AE4F3A471CC1430900780A50 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = waterlink;
+				TargetAttributes = {
+					AE4F3A5E1CC1443F00780A50 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = AE4F3A4A1CC1430900780A50 /* Build configuration list for PBXProject "ParallelChange" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AE4F3A461CC1430900780A50;
+			productRefGroup = AE4F3A501CC1430900780A50 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AE4F3A5E1CC1443F00780A50 /* ParallelChangeTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AE4F3A5D1CC1443F00780A50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AE4F3A5B1CC1443F00780A50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE4F3A6B1CC1456400780A50 /* AuthenticatorTest.swift in Sources */,
+				AE2904461CC14B34003103CC /* ShoppingCarTest.swift in Sources */,
+				AE2904441CC14AAD003103CC /* AuthenticationService.swift in Sources */,
+				AE2904481CC14C3F003103CC /* ShoppingCart.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AE4F3A541CC1430900780A50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AE4F3A551CC1430900780A50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AE4F3A651CC1444000780A50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ParallelChangeTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tddfellow.ParallelChangeTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "ParallelChangeTest/ParallelChangeTest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		AE4F3A661CC1444000780A50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ParallelChangeTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tddfellow.ParallelChangeTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "ParallelChangeTest/ParallelChangeTest-Bridging-Header.h";
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AE4F3A4A1CC1430900780A50 /* Build configuration list for PBXProject "ParallelChange" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE4F3A541CC1430900780A50 /* Debug */,
+				AE4F3A551CC1430900780A50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE4F3A641CC1444000780A50 /* Build configuration list for PBXNativeTarget "ParallelChangeTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE4F3A651CC1444000780A50 /* Debug */,
+				AE4F3A661CC1444000780A50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AE4F3A471CC1430900780A50 /* Project object */;
+}
