@@ -4,8 +4,8 @@ const int numberOfGenerations = 20;
 const int millisecondsBetweenGenerations = 500;
 
 // specific starting boards (see https://en.wikipedia.org/wiki/Conway's_Game_of_Life)
-//var startingBoard = BlinkerPeriod2();
-//var startingBoard = BeaconPeriod2();
+// var startingBoard = BlinkerPeriod2();
+// var startingBoard = BeaconPeriod2();
 var startingBoard = PulsarPeriod3();
 var game = new GameOfLife(startingBoard);
 
@@ -26,12 +26,12 @@ static void PrintBoard(GameOfLife game, int generation)
     Console.SetCursorPosition(0,0);
     Console.WriteLine($"Generation: {generation}");
     
-    for (int x = 0; x <= game.Board.GetUpperBound(0); x++)
+    for (int x = 0; x < game.Board.Size; x++)
     {
         PrintCellSeparator();
-        for (int y = 0; y <= game.Board.GetUpperBound(1); y++)
+        for (int y = 0; y < game.Board.Size; y++)
         {
-            PrintCell(game.Board[x, y]);
+            PrintCell(game.Board.GetCellValue(x, y));
             PrintCellSeparator();
         }
         PrintNewLine();
@@ -53,101 +53,101 @@ static void PrintNewLine()
     Console.WriteLine();
 }
 
-static bool[,] BlinkerPeriod2()
+static Board BlinkerPeriod2()
 {
-    var startingBoard = new bool[5,5];
-    startingBoard[2, 2] = true;
-    startingBoard[1, 2] = true;
-    startingBoard[3, 2] = true;
+    var startingBoard = new Board(5, false);
+    startingBoard.SetCellValue(2, 2, true);
+    startingBoard.SetCellValue(1, 2, true);
+    startingBoard.SetCellValue(3, 2, true);
     return startingBoard;
 }
 
-static bool[,] BeaconPeriod2()
+static Board BeaconPeriod2()
 {
-    var startingBoard = new bool[6,6];
+    var startingBoard = new Board(6, false);
     
-    startingBoard[1, 3] = true;
-    startingBoard[1, 4] = true;
-    startingBoard[2, 4] = true;
+    startingBoard.SetCellValue(1, 3, true);
+    startingBoard.SetCellValue(1, 4, true);
+    startingBoard.SetCellValue(2, 4, true);
     
-    startingBoard[3, 1] = true;
-    startingBoard[4, 1] = true;
-    startingBoard[4, 2] = true;
+    startingBoard.SetCellValue(3, 1, true);
+    startingBoard.SetCellValue(4, 1, true);
+    startingBoard.SetCellValue(4, 2, true);
     
     return startingBoard;
 }
 
-static bool[,] PulsarPeriod3()
+static Board PulsarPeriod3()
 {
-    var startingBoard = new bool[17,17];
+    var startingBoard = new Board(17, false);
     
     // bottom left pattern, starting at the bottom and moving clockwise 
-    startingBoard[4, 2] = true;
-    startingBoard[5, 2] = true;
-    startingBoard[6, 2] = true;
+    startingBoard.SetCellValue(4, 2, true);
+    startingBoard.SetCellValue(5, 2, true);
+    startingBoard.SetCellValue(6, 2, true);
     
-    startingBoard[2, 4] = true;
-    startingBoard[2, 5] = true;
-    startingBoard[2, 6] = true;
+    startingBoard.SetCellValue(2, 4, true);
+    startingBoard.SetCellValue(2, 5, true);
+    startingBoard.SetCellValue(2, 6, true);
     
-    startingBoard[4, 7] = true;
-    startingBoard[5, 7] = true;
-    startingBoard[6, 7] = true;
+    startingBoard.SetCellValue(4, 7, true);
+    startingBoard.SetCellValue(5, 7, true);
+    startingBoard.SetCellValue(6, 7, true);
     
-    startingBoard[7, 4] = true;
-    startingBoard[7, 5] = true;
-    startingBoard[7, 6] = true;
+    startingBoard.SetCellValue(7, 4, true);
+    startingBoard.SetCellValue(7, 5, true);
+    startingBoard.SetCellValue(7, 6, true);
     
     // top left pattern, starting at the bottom and moving clockwise 
-    startingBoard[4, 9] = true;
-    startingBoard[5, 9] = true;
-    startingBoard[6, 9] = true;
+    startingBoard.SetCellValue(4, 9, true);
+    startingBoard.SetCellValue(5, 9, true);
+    startingBoard.SetCellValue(6, 9, true);
     
-    startingBoard[2, 10] = true;
-    startingBoard[2, 11] = true;
-    startingBoard[2, 12] = true;
+    startingBoard.SetCellValue(2, 10, true);
+    startingBoard.SetCellValue(2, 11, true);
+    startingBoard.SetCellValue(2, 12, true);
     
-    startingBoard[4, 14] = true;
-    startingBoard[5, 14] = true;
-    startingBoard[6, 14] = true;
+    startingBoard.SetCellValue(4, 14, true);
+    startingBoard.SetCellValue(5, 14, true);
+    startingBoard.SetCellValue(6, 14, true);
     
-    startingBoard[7, 10] = true;
-    startingBoard[7, 11] = true;
-    startingBoard[7, 12] = true;
+    startingBoard.SetCellValue(7, 10, true);
+    startingBoard.SetCellValue(7, 11, true);
+    startingBoard.SetCellValue(7, 12, true);
     
     // top right pattern, starting at the bottom and moving clockwise 
-    startingBoard[10, 9] = true;
-    startingBoard[11, 9] = true;
-    startingBoard[12, 9] = true;
+    startingBoard.SetCellValue(10, 9, true);
+    startingBoard.SetCellValue(11, 9, true);
+    startingBoard.SetCellValue(12, 9, true);
     
-    startingBoard[9, 10] = true;
-    startingBoard[9, 11] = true;
-    startingBoard[9, 12] = true;
+    startingBoard.SetCellValue(9, 10, true);
+    startingBoard.SetCellValue(9, 11, true);
+    startingBoard.SetCellValue(9, 12, true);
     
-    startingBoard[10, 14] = true;
-    startingBoard[11, 14] = true;
-    startingBoard[12, 14] = true;
+    startingBoard.SetCellValue(10, 14, true);
+    startingBoard.SetCellValue(11, 14, true);
+    startingBoard.SetCellValue(12, 14, true);
     
-    startingBoard[14, 10] = true;
-    startingBoard[14, 11] = true;
-    startingBoard[14, 12] = true;
+    startingBoard.SetCellValue(14, 10, true);
+    startingBoard.SetCellValue(14, 11, true);
+    startingBoard.SetCellValue(14, 12, true);
     
     // bottom left pattern, starting at the bottom and moving clockwise 
-    startingBoard[10, 2] = true;
-    startingBoard[11, 2] = true;
-    startingBoard[12, 2] = true;
+    startingBoard.SetCellValue(10, 2, true);
+    startingBoard.SetCellValue(11, 2, true);
+    startingBoard.SetCellValue(12, 2, true);
     
-    startingBoard[9, 4] = true;
-    startingBoard[9, 5] = true;
-    startingBoard[9, 6] = true;
+    startingBoard.SetCellValue(9, 4, true);
+    startingBoard.SetCellValue(9, 5, true);
+    startingBoard.SetCellValue(9, 6, true);
     
-    startingBoard[10, 7] = true;
-    startingBoard[11, 7] = true;
-    startingBoard[12, 7] = true;
+    startingBoard.SetCellValue(10, 7, true);
+    startingBoard.SetCellValue(11, 7, true);
+    startingBoard.SetCellValue(12, 7, true);
     
-    startingBoard[14, 4] = true;
-    startingBoard[14, 5] = true;
-    startingBoard[14, 6] = true;
+    startingBoard.SetCellValue(14, 4, true);
+    startingBoard.SetCellValue(14, 5, true);
+    startingBoard.SetCellValue(14, 6, true);
     
     return startingBoard;
 }

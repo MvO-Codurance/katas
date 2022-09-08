@@ -9,9 +9,9 @@ public class GameOfLifeShould
     public void Kill_A_Live_Cell_Alive_When_It_Has_Less_Than_2_Live_Neighbours()
     {
         // arrange
-        var startingBoard = new bool[3, 3];
+        var startingBoard = new Board(3, false);
         // the center cell is alive
-        startingBoard[1, 1] = true; 
+        startingBoard.SetCellValue(1, 1, true); 
         
         var game = new GameOfLife(startingBoard);
         
@@ -19,20 +19,20 @@ public class GameOfLifeShould
         game.NextGen();
         
         // assert
-        game.Board[1, 1].Should().BeFalse();
-        AssertCellsAreDeadExcept(game.Board, 1, 1);
+        game.Board.GetCellValue(1, 1).Should().BeFalse();
+        AssertAllCellsAreDeadExcept(game.Board, 1, 1);
     }
 
     [Fact]
     public void Keep_A_Live_Cell_Alive_When_It_Has_2_Live_Neighbours()
     {
         // arrange
-        var startingBoard = new bool[3, 3];
+        var startingBoard = new Board(3, false);
         // the center cell is alive
-        startingBoard[1, 1] = true;
+        startingBoard.SetCellValue(1, 1, true); 
         // it has 2 live neighbours
-        startingBoard[0, 1] = true;
-        startingBoard[2, 1] = true;
+        startingBoard.SetCellValue(0, 1, true); 
+        startingBoard.SetCellValue(2, 1, true); 
         
         var game = new GameOfLife(startingBoard);
         
@@ -40,21 +40,21 @@ public class GameOfLifeShould
         game.NextGen();
         
         // assert
-        game.Board[1, 1].Should().BeTrue();
-        AssertCellsAreDeadExcept(game.Board, 1, 1);
+        game.Board.GetCellValue(1, 1).Should().BeTrue();
+        AssertAllCellsAreDeadExcept(game.Board, 1, 1);
     }
     
     [Fact]
     public void Keep_A_Live_Cell_Alive_When_It_Has_3_Live_Neighbours()
     {
         // arrange
-        var startingBoard = new bool[3, 3];
+        var startingBoard = new Board(3, false);
         // the center cell is alive
-        startingBoard[1, 1] = true;
+        startingBoard.SetCellValue(1, 1, true);
         // it has 3 live neighbours
-        startingBoard[0, 2] = true;
-        startingBoard[1, 2] = true;
-        startingBoard[2, 2] = true;
+        startingBoard.SetCellValue(0, 2, true);
+        startingBoard.SetCellValue(1, 2, true);
+        startingBoard.SetCellValue(2, 2, true);
         
         var game = new GameOfLife(startingBoard);
         
@@ -62,19 +62,18 @@ public class GameOfLifeShould
         game.NextGen();
         
         // assert
-        game.Board[1, 1].Should().BeTrue();
-        AssertCellsAreDeadExcept(game.Board, 1, 1);
+        game.Board.GetCellValue(1, 1).Should().BeTrue();
     }
     
     [Fact]
     public void Resurrect_A_Dead_Cell_When_It_Has_3_Live_Neighbours()
     {
         // arrange
-        var startingBoard = new bool[3, 3];
+        var startingBoard = new Board(3, false);
         // the center cell is already dead and it has 3 live neighbours
-        startingBoard[0, 2] = true;
-        startingBoard[1, 2] = true;
-        startingBoard[2, 2] = true;
+        startingBoard.SetCellValue(0, 2, true);
+        startingBoard.SetCellValue(1, 2, true);
+        startingBoard.SetCellValue(2, 2, true);
         
         var game = new GameOfLife(startingBoard);
         
@@ -82,8 +81,8 @@ public class GameOfLifeShould
         game.NextGen();
         
         // assert
-        game.Board[1, 1].Should().BeTrue();
-        AssertCellsAreDeadExcept(game.Board, 1, 1);
+        game.Board.GetCellValue(1, 1).Should().BeTrue();
+        AssertAllCellsAreDeadExcept(game.Board, 1, 1);
     }
     
     [Theory]
@@ -103,9 +102,9 @@ public class GameOfLifeShould
         int edgeCellY)
     {
         // arrange
-        var startingBoard = new bool[3, 3];
+        var startingBoard = new Board(3, false);
         // it has 1 live neighbour (the center cell)
-        startingBoard[1, 1] = true;
+        startingBoard.SetCellValue(1, 1, true);
 
         var game = new GameOfLife(startingBoard);
         
@@ -113,19 +112,19 @@ public class GameOfLifeShould
         game.NextGen();
         
         // assert
-        game.Board[edgeCellX, edgeCellY].Should().BeFalse();
-        AssertCellsAreDeadExcept(game.Board, edgeCellX, edgeCellY);
+        game.Board.GetCellValue(edgeCellX, edgeCellY).Should().BeFalse();
+        AssertAllCellsAreDeadExcept(game.Board, edgeCellX, edgeCellY);
     }
     
-    private void AssertCellsAreDeadExcept(bool[,] board, int exceptX, int exceptY)
+    private void AssertAllCellsAreDeadExcept(Board board, int exceptX, int exceptY)
     {
-        for (int x = 0; x < board.GetUpperBound(0); x++)
+        for (int x = 0; x < board.Size; x++)
         {
-            for (int y = 0; y < board.GetUpperBound(1); y++)
+            for (int y = 0; y < board.Size; y++)
             {
                 if (x != exceptX && y != exceptY)
                 {
-                    board[x, y].Should().BeFalse($"expected cell[{x},{y}] to be dead");
+                    board.GetCellValue(x, y).Should().BeFalse($"expected cell[{x},{y}] to be dead");
                 }
             }
         }
