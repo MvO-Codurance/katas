@@ -4,8 +4,8 @@ namespace Tennis
 {
     public class TennisGame1 : ITennisGame
     {
-        private int _player1Score = 0;
-        private int _player2Score = 0;
+        private int _player1Score;
+        private int _player2Score;
         private readonly string _player1Name;
         private readonly string _player2Name;
 
