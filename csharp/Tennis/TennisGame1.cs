@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 
 namespace Tennis
 {
@@ -28,25 +29,9 @@ namespace Tennis
         public string GetScore()
         {
             string score = "";
-            var tempScore = 0;
             if (_player1Score == _player2Score)
             {
-                switch (_player1Score)
-                {
-                    case 0:
-                        score = "Love-All";
-                        break;
-                    case 1:
-                        score = "Fifteen-All";
-                        break;
-                    case 2:
-                        score = "Thirty-All";
-                        break;
-                    default:
-                        score = "Deuce";
-                        break;
-
-                }
+                score = GetEqualScore();
             }
             else if (_player1Score >= 4 || _player2Score >= 4)
             {
@@ -60,6 +45,7 @@ namespace Tennis
             {
                 for (var i = 1; i < 3; i++)
                 {
+                    int tempScore;
                     if (i == 1) tempScore = _player1Score;
                     else { score += "-"; tempScore = _player2Score; }
                     switch (tempScore)
@@ -79,6 +65,19 @@ namespace Tennis
                     }
                 }
             }
+            return score;
+        }
+
+        private string GetEqualScore()
+        {
+            string score = _player1Score switch
+            {
+                0 => "Love-All",
+                1 => "Fifteen-All",
+                2 => "Thirty-All",
+                _ => "Deuce"
+            };
+
             return score;
         }
     }
