@@ -14,9 +14,9 @@ namespace ParallelAndNarrowChange{
 
         [Test]
         public void calculate_the_final_price(){
-            cart.Add(10);
+            cart.AddMultiple(10);
 
-            cart.CalculateTotalPrice().Should().Be(10);
+            cart.CalculateTotalPriceMultiple().Should().Be(10);
         }
         
         [Test]
@@ -28,9 +28,9 @@ namespace ParallelAndNarrowChange{
 
         [Test]
         public void knows_the_number_of_items(){
-            cart.Add(10);
+            cart.AddMultiple(10);
 
-            cart.NumberOfProducts().Should().Be(1);
+            cart.NumberOfProductsMultiple().Should().Be(1);
         }
         
         [Test]
@@ -42,9 +42,9 @@ namespace ParallelAndNarrowChange{
 
         [Test]
         public void may_offer_discounts_when_there_at_least_one_expensive_product(){
-            cart.Add(120);
+            cart.AddMultiple(120);
 
-            cart.HasDiscount().Should().BeTrue();
+            cart.HasDiscountMultiple().Should().BeTrue();
         }
         
         [Test]
@@ -56,9 +56,9 @@ namespace ParallelAndNarrowChange{
 
         [Test]
         public void does_not_offer_discount_for_cheap_products(){
-            cart.Add(10);
+            cart.AddMultiple(10);
 
-            cart.HasDiscount().Should().BeFalse();
+            cart.HasDiscountMultiple().Should().BeFalse();
         }
         
         [Test]
