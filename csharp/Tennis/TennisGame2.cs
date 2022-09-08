@@ -1,3 +1,5 @@
+using System;
+
 namespace Tennis
 {
     public class TennisGame2 : ITennisGame
@@ -7,8 +9,8 @@ namespace Tennis
 
         private string p1res = "";
         private string p2res = "";
-        private string _player1Name;
-        private string _player2Name;
+        private readonly string _player1Name;
+        private readonly string _player2Name;
 
         public TennisGame2(string player1Name, string player2Name)
         {
@@ -103,38 +105,14 @@ namespace Tennis
             return score;
         }
 
-        public void SetP1Score(int number)
+        public void WonPoint(string playerName)
         {
-            for (int i = 0; i < number; i++)
-            {
-                P1Score();
-            }
-        }
-
-        public void SetP2Score(int number)
-        {
-            for (var i = 0; i < number; i++)
-            {
-                P2Score();
-            }
-        }
-
-        private void P1Score()
-        {
-            _player1Points++;
-        }
-
-        private void P2Score()
-        {
-            _player2Points++;
-        }
-
-        public void WonPoint(string player)
-        {
-            if (player == "player1")
-                P1Score();
+            if (string.Equals(playerName, _player1Name, StringComparison.OrdinalIgnoreCase))
+                _player1Points++;
+            else if (string.Equals(playerName, _player2Name, StringComparison.OrdinalIgnoreCase))
+                _player2Points++;
             else
-                P2Score();
+                throw new ArgumentException($"Unknown player named {playerName}.");
         }
 
     }
