@@ -21,19 +21,12 @@ namespace Tennis
         public string GetScore()
         {
             var score = "";
-            if (_player1Points == _player2Points && _player1Points < 3)
+            
+            if (_player1Points == _player2Points)
             {
-                if (_player1Points == 0)
-                    score = "Love";
-                if (_player1Points == 1)
-                    score = "Fifteen";
-                if (_player1Points == 2)
-                    score = "Thirty";
-                score += "-All";
+                score = GetEqualScore(_player1Points);
             }
-            if (_player1Points == _player2Points && _player1Points > 2)
-                score = "Deuce";
-
+            
             if (_player1Points > 0 && _player2Points == 0)
             {
                 if (_player1Points == 1)
@@ -115,6 +108,18 @@ namespace Tennis
                 throw new ArgumentException($"Unknown player named {playerName}.");
         }
 
+        private string GetEqualScore(int points)
+        {
+            var score = points switch
+            {
+                0 => "Love-All",
+                1 => "Fifteen-All",
+                2 => "Thirty-All",
+                _ => "Deuce"
+            };
+
+            return score;
+        }
     }
 }
 
