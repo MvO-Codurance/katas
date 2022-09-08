@@ -28,18 +28,15 @@ namespace Tennis
 
         public string GetScore()
         {
-            string score = "";
+            var score = string.Empty;
+            
             if (_player1Score == _player2Score)
             {
                 score = GetEqualScore();
             }
             else if (_player1Score >= 4 || _player2Score >= 4)
             {
-                var minusResult = _player1Score - _player2Score;
-                if (minusResult == 1) score = "Advantage player1";
-                else if (minusResult == -1) score = "Advantage player2";
-                else if (minusResult >= 2) score = "Win for player1";
-                else score = "Win for player2";
+                score = GetAdvantageOrWinScore();
             }
             else
             {
@@ -70,12 +67,26 @@ namespace Tennis
 
         private string GetEqualScore()
         {
-            string score = _player1Score switch
+            var score = _player1Score switch
             {
                 0 => "Love-All",
                 1 => "Fifteen-All",
                 2 => "Thirty-All",
                 _ => "Deuce"
+            };
+
+            return score;
+        }
+
+        private string GetAdvantageOrWinScore()
+        {
+            var differenceInScore = _player1Score - _player2Score;
+            var score = differenceInScore switch
+            {
+                1 => "Advantage player1",
+                -1 => "Advantage player2",
+                >= 2 => "Win for player1",
+                _ => "Win for player2"
             };
 
             return score;
