@@ -20,8 +20,6 @@ namespace Tennis
 
         public string GetScore()
         {
-            var score = "";
-            
             if (_player1Points == _player2Points)
             {
                 return GetEqualScore(_player1Points);
@@ -32,25 +30,7 @@ namespace Tennis
                 return $"{GetPointsScore(_player1Points)}-{GetPointsScore(_player2Points)}";
             }
 
-            if (_player1Points > _player2Points && _player2Points >= 3)
-            {
-                score = "Advantage player1";
-            }
-
-            if (_player2Points > _player1Points && _player1Points >= 3)
-            {
-                score = "Advantage player2";
-            }
-
-            if (_player1Points >= 4 && _player2Points >= 0 && (_player1Points - _player2Points) >= 2)
-            {
-                score = "Win for player1";
-            }
-            if (_player2Points >= 4 && _player1Points >= 0 && (_player2Points - _player1Points) >= 2)
-            {
-                score = "Win for player2";
-            }
-            return score;
+            return GetAdvantageOrWinScore();
         }
 
         public void WonPoint(string playerName)
@@ -85,6 +65,20 @@ namespace Tennis
                 2 => "Thirty",
                 3 => "Forty",
                 _ => string.Empty
+            };
+
+            return score;
+        }
+        
+        private string GetAdvantageOrWinScore()
+        {
+            var differenceInScore = _player1Points - _player2Points;
+            var score = differenceInScore switch
+            {
+                1 => "Advantage player1",
+                -1 => "Advantage player2",
+                >= 2 => "Win for player1",
+                _ => "Win for player2"
             };
 
             return score;
