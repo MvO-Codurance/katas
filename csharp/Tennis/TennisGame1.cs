@@ -1,24 +1,28 @@
+using System;
+
 namespace Tennis
 {
     public class TennisGame1 : ITennisGame
     {
         private int _player1Score = 0;
         private int _player2Score = 0;
-        private string player1Name;
-        private string player2Name;
+        private readonly string _player1Name;
+        private readonly string _player2Name;
 
         public TennisGame1(string player1Name, string player2Name)
         {
-            this.player1Name = player1Name;
-            this.player2Name = player2Name;
+            _player1Name = player1Name;
+            _player2Name = player2Name;
         }
 
         public void WonPoint(string playerName)
         {
-            if (playerName == "player1")
+            if (string.Equals(playerName, _player1Name, StringComparison.OrdinalIgnoreCase))
                 _player1Score += 1;
-            else
+            else if (string.Equals(playerName, _player2Name, StringComparison.OrdinalIgnoreCase))
                 _player2Score += 1;
+            else
+                throw new ArgumentException($"Unknown player named {playerName}.");
         }
 
         public string GetScore()
