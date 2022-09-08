@@ -18,9 +18,9 @@ namespace Tennis
         public void WonPoint(string playerName)
         {
             if (string.Equals(playerName, _player1Name, StringComparison.OrdinalIgnoreCase))
-                _player1Score += 1;
+                _player1Score++;
             else if (string.Equals(playerName, _player2Name, StringComparison.OrdinalIgnoreCase))
-                _player2Score += 1;
+                _player2Score++;
             else
                 throw new ArgumentException($"Unknown player named {playerName}.");
         }
