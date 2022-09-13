@@ -4,10 +4,11 @@ public class Trip
 {
     private const int TimeTakenBetweenFloors = 1;
     private const int TimeTakenAtFloor = 3;
+
+    private Floor StartingFloor { get; }
+    private Floor CalledFromFloor { get;  }
+    private Floor DestinationFloor { get; }
     
-    public Floor StartingFloor { get; private set; }
-    public Floor CalledFromFloor { get; private set; }
-    public Floor GoToFloor { get; private set; }
     public int TimeTaken { get; private set; }
     public string DoorsOpenedOnFloors { get; private set; }
 
@@ -15,7 +16,7 @@ public class Trip
     {
         StartingFloor = startingFloor;
         CalledFromFloor = call.CalledFromFloor;
-        GoToFloor = call.GoToFloor;
+        DestinationFloor = call.DestinationFloor;
         TimeTaken = CalculateTripTime();
         DoorsOpenedOnFloors = GetDoorsOpenedOnFloors();
     }
@@ -23,7 +24,7 @@ public class Trip
     private int CalculateTripTime()
     {
         var startingToCalled = Math.Abs(StartingFloor - CalledFromFloor);
-        var calledToDestination = Math.Abs(CalledFromFloor - GoToFloor);
+        var calledToDestination = Math.Abs(CalledFromFloor - DestinationFloor);
 
         return (startingToCalled * TimeTakenBetweenFloors) +
                TimeTakenAtFloor +
@@ -33,7 +34,7 @@ public class Trip
 
     private string GetDoorsOpenedOnFloors()
     {
-        return $"{GetFloorLetter(CalledFromFloor)}{GetFloorLetter(GoToFloor)}";
+        return $"{GetFloorLetter(CalledFromFloor)}{GetFloorLetter(DestinationFloor)}";
     }
     
     private char GetFloorLetter(Floor floor)

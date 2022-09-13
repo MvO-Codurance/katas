@@ -18,7 +18,7 @@ public class Trips
         var trip = new Trip(_currentFloor, call);
         _tripList.Add(trip);
 
-        _currentFloor = call.GoToFloor;
+        _currentFloor = call.DestinationFloor;
         
         return trip;
     }

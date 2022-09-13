@@ -14,7 +14,7 @@ public class Elevator1
         var call = new Call
         {
             CalledFromFloor = calledFromFloor,
-            GoToFloor = goToFloor
+            DestinationFloor = goToFloor
         };
 
         Trips.AddFrom(call);

@@ -1,3 +1,3 @@
 namespace Elevator;
 
-public record struct Call(Floor CalledFromFloor, Floor GoToFloor);
+public record struct Call(Floor CalledFromFloor, Floor DestinationFloor);

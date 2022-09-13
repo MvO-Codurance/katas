@@ -12,12 +12,12 @@ public class TripsShould
     [InlineAutoNSubstituteData(Floor.One, Floor.Three, "13")]
     public void Add_A_Trip_With_The_Doors_Opening_On_The_Correct_Floors(
         Floor calledFromFloor,
-        Floor goToFloor,
+        Floor destinationFloor,
         string expectedDoorsOpenOnFloor)
     {
         var sut = new Trips(Floor.Ground);
 
-        sut.AddFrom(new Call(calledFromFloor, goToFloor)).DoorsOpenedOnFloors.Should().Be(expectedDoorsOpenOnFloor);
+        sut.AddFrom(new Call(calledFromFloor, destinationFloor)).DoorsOpenedOnFloors.Should().Be(expectedDoorsOpenOnFloor);
     }
     
     [Fact]
@@ -41,12 +41,12 @@ public class TripsShould
     public void Calculate_The_Time_Taken_For_A_Trip(
         Floor startingFloor, 
         Floor calledFromFloor, 
-        Floor goToFloor,
+        Floor destinationFloor,
         int expectedTimeTaken)
     {
         var sut = new Elevator1(startingFloor);
     
-        sut.Call(calledFromFloor, goToFloor);
+        sut.Call(calledFromFloor, destinationFloor);
             
         sut.Trips.TimeTaken().Should().Be(expectedTimeTaken);
     }
