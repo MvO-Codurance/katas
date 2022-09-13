@@ -2,9 +2,9 @@ namespace Elevator;
 
 public enum Floor
 {
-    Basement = 'B',
-    Ground = 'G',
-    One = '1',
-    Two = '2',
-    Three = '3'
+    Basement = 1,
+    Ground = 2,
+    One = 3,
+    Two = 4,
+    Three = 5
 }

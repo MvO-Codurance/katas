@@ -17,19 +17,4 @@ public class Elevator1Should
         
         sut.Trips.DoorsOpenedOnFloors().Should().Be("3BGB2B13");
     }
-    
-    // [Theory]
-    // [InlineAutoNSubstituteData(Floor.Ground, Floor.Three, Floor.Basement, 13)]
-    // public void Record_Total_Trip_Time(
-    //     Floor startingFloor, 
-    //     Floor calledFromFloor, 
-    //     Floor goToFloor,
-    //     int expectedTimeTaken)
-    // {
-    //     var sut = new Elevator1(startingFloor);
-    //
-    //     sut.Call(calledFromFloor, goToFloor);
-    //         
-    //     sut.Trips.TimeTaken().Should().Be(expectedTimeTaken);
-    // }
 }
