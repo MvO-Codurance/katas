@@ -2,13 +2,21 @@ namespace Elevator;
 
 public class Elevator1
 {
-    private List<Floor> _doorsOpenOnFloor = new();
-    
-    public string Call(Floor calledFromFloor, Floor goToFloor)
-    {
-        _doorsOpenOnFloor.Add(calledFromFloor);
-        _doorsOpenOnFloor.Add(goToFloor);
+    public Trips Trips { get; private set; }
 
-        return string.Join(string.Empty, _doorsOpenOnFloor.Select(x => (char)x));
+    public Elevator1(Floor startingFloor)
+    {
+        Trips = new Trips(startingFloor);
+    }
+    
+    public void Call(Floor calledFromFloor, Floor goToFloor)
+    {
+        var call = new Call
+        {
+            CalledFromFloor = calledFromFloor,
+            GoToFloor = goToFloor
+        };
+
+        Trips.AddFrom(call);
     }
 }
