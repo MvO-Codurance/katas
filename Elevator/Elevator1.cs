@@ -9,12 +9,12 @@ public class Elevator1
         Trips = new Trips(startingFloor);
     }
     
-    public void Call(Floor calledFromFloor, Floor goToFloor)
+    public void Call(Floor calledFromFloor, Floor destinationFloor)
     {
         var call = new Call
         {
             CalledFromFloor = calledFromFloor,
-            DestinationFloor = goToFloor
+            DestinationFloor = destinationFloor
         };
 
         Trips.AddFrom(call);
