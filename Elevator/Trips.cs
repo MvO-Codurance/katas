@@ -5,7 +5,7 @@ namespace Elevator;
 public class Trips
 {
     private Floor _currentFloor;
-    private List<Trip> _tripList;
+    private readonly List<Trip> _tripList;
 
     public Trips(Floor startingFloor)
     {

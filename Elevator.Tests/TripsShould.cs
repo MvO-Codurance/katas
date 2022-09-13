@@ -52,7 +52,7 @@ public class TripsShould
     }
     
     [Fact]
-    public void Calculate_Time_Taken_For_All_Trips_In_Order_3_B_G_B_2_B_1_3()
+    public void Calculate_Time_Taken_For_All_Trips_In_Order_G_3_B_G_B_2_B_1_3()
     {
         var sut = new Elevator1(Floor.Ground);
 
