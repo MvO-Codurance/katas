@@ -1,0 +1,27 @@
+{
+    "name": "gbirke/parallel-change-kata",
+    "description": "Parallel change refactoring kata",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gabriel Birke",
+            "email": "gabriel.birke@wikimedia.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ParallelChange\\": "src"
+        }
+    },
+    "require": {
+        "PHP": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "scripts": {
+        "examples": ["php shopping_cart_example.php", "php authentication_example.php"],
+        "test": "phpunit",
+        "run": ["@examples", "@test"]
+    }
+}
