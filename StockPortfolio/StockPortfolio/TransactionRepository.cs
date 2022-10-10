@@ -11,6 +11,6 @@ public class TransactionRepository : ITransactionRepository
 
     public List<Transaction> GetAll()
     {
-        return _transactions.OrderByDescending(t => t.Date).ToList();
+        return _transactions.OrderBy(t => t.Date).ToList();
     }
 }

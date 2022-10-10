@@ -19,7 +19,7 @@ public class TransactionRepositoryShould
     
     [Theory]
     [InlineAutoNSubstituteData]
-    public void Get_All_Transactions_In_Date_Descending_Order(
+    public void Get_All_Transactions_In_Date_Ascending_Order(
         Transaction transaction1,
         Transaction transaction2,
         Transaction transaction3,
@@ -35,7 +35,7 @@ public class TransactionRepositoryShould
         actual.Should().Contain(transaction1);
         actual.Should().Contain(transaction2);
         actual.Should().Contain(transaction3);
-        actual[0].Date.Should().BeOnOrAfter(actual[1].Date);
-        actual[1].Date.Should().BeOnOrAfter(actual[2].Date);
+        actual[0].Date.Should().BeOnOrBefore(actual[1].Date);
+        actual[1].Date.Should().BeOnOrBefore(actual[2].Date);
     }
 }
