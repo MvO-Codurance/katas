@@ -11,7 +11,7 @@ public class PortfolioShould
     [InlineAutoNSubstituteData]
     public void Print_Portfolio_Correctly(
         [Frozen] ShareRepository shareRepository,
-        [Frozen] ITransactionRepository transactionRepository,
+        [Frozen] TransactionRepository transactionRepository,
         Portfolio sut)
     {
         LoadSharePrices(shareRepository);
