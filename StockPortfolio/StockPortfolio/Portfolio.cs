@@ -11,11 +11,6 @@ public class Portfolio
         _transactionRepository = transactionRepository ?? throw new ArgumentNullException(nameof(transactionRepository));
     }
     
-    public void SetShareValue(Share share, ShareValue value)
-    {
-        _shareRepository.SetShareValue(share, value);
-    }
-
     public void Buy(Share share, ShareUnits units, DateOnly date)
     {
         var transaction = new Transaction(share, units, date);

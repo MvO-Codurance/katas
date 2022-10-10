@@ -2,5 +2,6 @@ namespace StockPortfolio;
 
 public interface IShareRepository
 {
-    public void SetShareValue(Share share, ShareValue value);
+    public void SetSharePrice(Share share, SharePrice price);
+    public SharePrice GetSharePrice(Share share);
 }
