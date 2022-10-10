@@ -4,11 +4,16 @@ public class Portfolio
 {
     private readonly IShareRepository _shareRepository;
     private readonly ITransactionRepository _transactionRepository;
+    private readonly IStatementGenerator _statementGenerator;
 
-    public Portfolio(IShareRepository shareRepository, ITransactionRepository transactionRepository)
+    public Portfolio(
+        IShareRepository shareRepository, 
+        ITransactionRepository transactionRepository,
+        IStatementGenerator statementGenerator)
     {
         _shareRepository = shareRepository ?? throw new ArgumentNullException(nameof(shareRepository));
         _transactionRepository = transactionRepository ?? throw new ArgumentNullException(nameof(transactionRepository));
+        _statementGenerator = statementGenerator ?? throw new ArgumentNullException(nameof(statementGenerator));
     }
     
     public void Buy(Share share, ShareUnits units, DateOnly date)
@@ -25,6 +30,9 @@ public class Portfolio
 
     public string Print()
     {
+        var transactions = _transactionRepository.GetAll();
+        var statement = _statementGenerator.Generate(transactions);
+        
         return @"
 company | shares | current price | current value | last operation
 Old School Waterfall Software LTD | 500 | $5.75 | $2,875.00 | sold 500 on 11/12/2018

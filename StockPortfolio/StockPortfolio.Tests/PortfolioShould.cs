@@ -12,6 +12,7 @@ public class PortfolioShould
     public void Print_Portfolio_Correctly(
         [Frozen] ShareRepository shareRepository,
         [Frozen] TransactionRepository transactionRepository,
+        [Frozen] StatementGenerator statementGenerator,
         Portfolio sut)
     {
         LoadSharePrices(shareRepository);
