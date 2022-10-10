@@ -1,7 +1,12 @@
+using System.Globalization;
+using System.Text;
+
 namespace StockPortfolio;
 
 public class Portfolio
 {
+    private static readonly CultureInfo CurrencyCulture = CultureInfo.GetCultureInfo("en-US");
+    
     private readonly IShareRepository _shareRepository;
     private readonly ITransactionRepository _transactionRepository;
     private readonly IStatementGenerator _statementGenerator;
@@ -32,12 +37,21 @@ public class Portfolio
     {
         var transactions = _transactionRepository.GetAll();
         var statement = _statementGenerator.Generate(transactions);
+
+        var output = new StringBuilder();
+        output.AppendLine();
+        output.AppendLine("company | shares | current price | current value | last operation");
         
-        return @"
-company | shares | current price | current value | last operation
-Old School Waterfall Software LTD | 500 | $5.75 | $2,875.00 | sold 500 on 11/12/2018
-Crafter Masters Limited | 400 | $17.25 | $6,900.00 | bought 400 on 09/06/2016
-XP Practitioners Incorporated | 700 | $25.55 | $17,885.00 | bought 700 on 10/12/2018
-";
+        foreach (var line in statement.Lines)
+        {
+            output.AppendLine($"{line.Share.Name} | {line.ShareUnits.Number} | {FormatCurrency(line.Price.Value)} | {FormatCurrency(line.Value)} | {line.LastOperation}");
+        }
+
+        return output.ToString();
+    }
+
+    private string FormatCurrency(decimal value)
+    {
+        return value.ToString("C", CurrencyCulture);
     }
 }
