@@ -1,10 +1,18 @@
+using System.Runtime.CompilerServices;
+
 namespace BankOcr;
 
 public class AccountFileEntryParser
 {
     private const int EntryLineCount = 3;
     private const int EntryLineLength = 27;
-    private const int DigitLineLength = 3;
+    
+    private readonly AccountFileEntryDigitParser _digitParser;
+
+    public AccountFileEntryParser()
+    {
+        _digitParser = new AccountFileEntryDigitParser();
+    }
     
     public string Parse(string[] accountFileEntryLines)
     {
@@ -19,14 +27,14 @@ public class AccountFileEntryParser
         ValidateEntryLine(line2);
         ValidateEntryLine(line3);
 
-        var line1Digits = line1.Chunk(DigitLineLength).ToList();
-        var line2Digits = line2.Chunk(DigitLineLength).ToList();
-        var line3Digits = line3.Chunk(DigitLineLength).ToList();
+        var line1Digits = line1.Chunk(AccountFileEntryDigitParser.DigitLineLength).ToList();
+        var line2Digits = line2.Chunk(AccountFileEntryDigitParser.DigitLineLength).ToList();
+        var line3Digits = line3.Chunk(AccountFileEntryDigitParser.DigitLineLength).ToList();
 
         string result = string.Empty;
         for (int index = 0; index < line1Digits.Count(); index++)
         {
-            result += ParseDigit(
+            result += _digitParser.Parse(
                 new string(line1Digits[index]), 
                 new string(line2Digits[index]), 
                 new string(line3Digits[index]));
@@ -35,41 +43,13 @@ public class AccountFileEntryParser
         return result;
     }
 
-    public string ParseDigit(string line1, string line2, string line3)
+    private static void ValidateEntryLine(
+        string line, 
+        [CallerArgumentExpression("line")] string lineParameterName = "")
     {
-        ValidateDigitLine(line1);
-        ValidateDigitLine(line2);
-        ValidateDigitLine(line3);
-        
-        return line1 switch
+        if (string.IsNullOrEmpty(line) || line.Length != EntryLineLength)
         {
-            " _ " when line2 == "| |" && line3 == "|_|" => 0.ToString(),
-            "   " when line2 == "  |" && line3 == "  |" => 1.ToString(),
-            " _ " when line2 == " _|" && line3 == "|_ " => 2.ToString(),
-            " _ " when line2 == " _|" && line3 == " _|" => 3.ToString(),
-            "   " when line2 == "|_|" && line3 == "  |" => 4.ToString(),
-            " _ " when line2 == "|_ " && line3 == " _|" => 5.ToString(),
-            " _ " when line2 == "|_ " && line3 == "|_|" => 6.ToString(),
-            " _ " when line2 == "  |" && line3 == "  |" => 7.ToString(),
-            " _ " when line2 == "|_|" && line3 == "|_|" => 8.ToString(),
-            " _ " when line2 == "|_|" && line3 == " _|" => 9.ToString(),
-            _ => "?"
-        };
-    }
-
-    private static void ValidateEntryLine(string line)
-    {
-        if (line.Length != EntryLineLength)
-        {
-            throw new ArgumentException($"Account file entry line must be exactly {EntryLineLength} characters: '{line}' is {line.Length} characters.");
-        }
-    }
-    
-    private static void ValidateDigitLine(string line)
-    {
-        if (line.Length != DigitLineLength)
-        {
-            throw new ArgumentException($"Account file entry digit must be exactly {DigitLineLength} characters: '{line}' is {line.Length} characters.");
+            throw new ArgumentException($"Account file entry line ({lineParameterName}) must be exactly {EntryLineLength} characters.");
         }
     }
 }
