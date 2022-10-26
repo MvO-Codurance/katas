@@ -1,12 +1,12 @@
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks.Dataflow;
 
 namespace BankOcr;
 
 public class AccountFileEntry
 {
-    private const int EntryLinesCount = 3;
     private const int EntryLineLength = 27;
+    
+    public  const int EntryLinesCount = 3;
 
     public string AccountNumber => new string(AccountNumberDigits.Select(x => x.Value).ToArray());
     
@@ -14,7 +14,7 @@ public class AccountFileEntry
 
     private AccountFileEntry()
     {
-        AccountNumberDigits = new List<AccountFileEntryDigit>();
+        AccountNumberDigits = new();
     }
     
     public static AccountFileEntry Create(string[] accountFileEntryLines)

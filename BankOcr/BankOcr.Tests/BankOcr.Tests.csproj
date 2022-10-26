@@ -16,6 +16,7 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="FluentAssertions" Version="6.7.0" />
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.10" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
         <PackageReference Include="NSubstitute" Version="4.4.0" />
         <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.15">
@@ -31,6 +32,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\BankOcr\BankOcr.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="TestData\**\*.*" />
+      <EmbeddedResource Include="TestData\**\*.*" />
     </ItemGroup>
 
 </Project>
