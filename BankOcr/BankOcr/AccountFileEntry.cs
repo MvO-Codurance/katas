@@ -1,23 +1,26 @@
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks.Dataflow;
 
 namespace BankOcr;
 
-public class AccountFileEntryParser
+public class AccountFileEntry
 {
-    private const int EntryLineCount = 3;
+    private const int EntryLinesCount = 3;
     private const int EntryLineLength = 27;
-    
-    private readonly AccountFileEntryDigitParser _digitParser;
 
-    public AccountFileEntryParser()
+    public string AccountNumber => new string(AccountNumberDigits.Select(x => x.Value).ToArray());
+    
+    public List<AccountFileEntryDigit> AccountNumberDigits { get; private set; }
+
+    private AccountFileEntry()
     {
-        _digitParser = new AccountFileEntryDigitParser();
+        AccountNumberDigits = new List<AccountFileEntryDigit>();
     }
     
-    public string Parse(string[] accountFileEntryLines)
+    public static AccountFileEntry Create(string[] accountFileEntryLines)
     {
         if (accountFileEntryLines == null) throw new ArgumentNullException(nameof(accountFileEntryLines));
-        if (accountFileEntryLines.Length != EntryLineCount) throw new ArgumentException($"Account file entry must be exactly {EntryLineCount} lines.");
+        if (accountFileEntryLines.Length != EntryLinesCount) throw new ArgumentException($"Account file entry must be exactly {EntryLinesCount} lines.");
 
         var line1 = accountFileEntryLines[0];
         var line2 = accountFileEntryLines[1];
@@ -27,17 +30,19 @@ public class AccountFileEntryParser
         ValidateEntryLine(line2);
         ValidateEntryLine(line3);
 
-        var line1Digits = line1.Chunk(AccountFileEntryDigitParser.DigitLineLength).ToList();
-        var line2Digits = line2.Chunk(AccountFileEntryDigitParser.DigitLineLength).ToList();
-        var line3Digits = line3.Chunk(AccountFileEntryDigitParser.DigitLineLength).ToList();
+        var line1Digits = line1.Chunk(AccountFileEntryDigit.DigitLineLength).ToList();
+        var line2Digits = line2.Chunk(AccountFileEntryDigit.DigitLineLength).ToList();
+        var line3Digits = line3.Chunk(AccountFileEntryDigit.DigitLineLength).ToList();
 
-        string result = string.Empty;
+        AccountFileEntry result = new();
         for (int index = 0; index < line1Digits.Count(); index++)
         {
-            result += _digitParser.Parse(
+            var digit = AccountFileEntryDigit.Create(
                 new string(line1Digits[index]), 
                 new string(line2Digits[index]), 
-                new string(line3Digits[index]));
+                new string(line3Digits[index])); 
+            
+            result.AccountNumberDigits.Add(digit);
         }
         
         return result;

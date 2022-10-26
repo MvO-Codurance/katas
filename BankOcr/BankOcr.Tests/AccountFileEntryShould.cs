@@ -3,7 +3,7 @@ using Xunit;
 
 namespace BankOcr.Tests;
 
-public class AccountFileEntryParserShould
+public class AccountFileEntryShould
 {
     [Fact]
     public void Parse_A_Single_Account_Number()
@@ -16,13 +16,13 @@ public class AccountFileEntryParserShould
         };
         string expectedResult = "123456789";
         
-        new AccountFileEntryParser().Parse(accountFileEntryLines).Should().Be(expectedResult);
+        AccountFileEntry.Create(accountFileEntryLines).AccountNumber.Should().Be(expectedResult);
     }
     
     [Fact]
     public void Throw_When_Given_Null_Entry_Lines()
     {
-        Action act = () => new AccountFileEntryParser().Parse(null);
+        Action act = () => AccountFileEntry.Create(null);
 
         act.Should().ThrowExactly<ArgumentNullException>()
             .WithParameterName("accountFileEntryLines");
@@ -32,7 +32,7 @@ public class AccountFileEntryParserShould
     [MemberData(nameof(InvalidAccountFileEntryLineCount))]
     public void Throw_When_Given_Invalid_Entry(string[] accountFileEntryLines)
     {
-        Action act = () => new AccountFileEntryParser().Parse(accountFileEntryLines);
+        Action act = () => AccountFileEntry.Create(accountFileEntryLines);
 
         act.Should().ThrowExactly<ArgumentException>()
             .WithMessage("Account file entry must be exactly 3 lines.");
@@ -44,8 +44,8 @@ public class AccountFileEntryParserShould
         string[] accountFileEntryLines,
         string invalidLineName)
     {
-        Action act = () => new AccountFileEntryParser().Parse(accountFileEntryLines);
-
+        Action act = () => AccountFileEntry.Create(accountFileEntryLines);
+        
         act.Should().ThrowExactly<ArgumentException>()
             .WithMessage($"Account file entry line ({invalidLineName}) must be exactly 27 characters.");
     }
