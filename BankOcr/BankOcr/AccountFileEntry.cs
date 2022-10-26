@@ -8,13 +8,13 @@ public class AccountFileEntry
     
     public  const int EntryLinesCount = 3;
 
-    public string AccountNumber => new string(AccountNumberDigits.Select(x => x.Value).ToArray());
+    private readonly List<AccountFileEntryDigit> _accountNumberDigits;
     
-    public List<AccountFileEntryDigit> AccountNumberDigits { get; private set; }
-
+    public string AccountNumber => new string(_accountNumberDigits.Select(x => x.Value).ToArray());
+    
     private AccountFileEntry()
     {
-        AccountNumberDigits = new();
+        _accountNumberDigits = new();
     }
     
     public static AccountFileEntry Create(string[] accountFileEntryLines)
@@ -42,10 +42,35 @@ public class AccountFileEntry
                 new string(line2Digits[index]), 
                 new string(line3Digits[index])); 
             
-            result.AccountNumberDigits.Add(digit);
+            result._accountNumberDigits.Add(digit);
         }
         
         return result;
+    }
+
+    public bool IsChecksumValid()
+    {
+        /*
+            account number:  3  4  5  8  8  2  8  6  5
+            position names:  d9 d8 d7 d6 d5 d4 d3 d2 d1
+            
+            checksum calculation:
+            ((1*d1) + (2*d2) + (3*d3) + ... + (9*d9)) mod 11 == 0
+        */
+        
+        var d1 = char.GetNumericValue(_accountNumberDigits[8].Value);
+        var d2 = char.GetNumericValue(_accountNumberDigits[7].Value);
+        var d3 = char.GetNumericValue(_accountNumberDigits[6].Value);
+        var d4 = char.GetNumericValue(_accountNumberDigits[5].Value);
+        var d5 = char.GetNumericValue(_accountNumberDigits[4].Value);
+        var d6 = char.GetNumericValue(_accountNumberDigits[3].Value);
+        var d7 = char.GetNumericValue(_accountNumberDigits[2].Value);
+        var d8 = char.GetNumericValue(_accountNumberDigits[1].Value);
+        var d9 = char.GetNumericValue(_accountNumberDigits[0].Value);
+
+        var sum = (1*d1) + (2*d2) + (3*d3) + (4*d4) + (5*d5) + (6*d6) + (7*d7) + (8*d8) + (9*d9);
+        var checksum = sum % 11;
+        return (checksum == 0);
     }
 
     private static void ValidateEntryLine(
