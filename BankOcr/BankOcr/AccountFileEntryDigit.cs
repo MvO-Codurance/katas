@@ -5,6 +5,7 @@ namespace BankOcr;
 public class AccountFileEntryDigit
 {
     public const int DigitLineLength = 3;
+    public const char IllegalDigit = '?';
 
     public char Value { get; private set; }
 
@@ -30,7 +31,7 @@ public class AccountFileEntryDigit
             " _ " when line2 == "  |" && line3 == "  |" => '7',
             " _ " when line2 == "|_|" && line3 == "|_|" => '8',
             " _ " when line2 == "|_|" && line3 == " _|" => '9',
-            _ => '?'
+            _ => IllegalDigit
         };
 
         return new AccountFileEntryDigit

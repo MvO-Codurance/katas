@@ -61,7 +61,7 @@ public class AccountFile
             {
                 writer.Write($"{entry.AccountNumber}");
             
-                if (entry.AccountNumber.Contains('?'))
+                if (entry.AccountNumber.Contains(AccountFileEntryDigit.IllegalDigit))
                 {
                     writer.Write(" ILL");
                 }
