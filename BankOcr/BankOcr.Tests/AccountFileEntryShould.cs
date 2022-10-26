@@ -74,29 +74,67 @@ public class AccountFileEntryShould
         }
     }
 
-    [Fact]
-    public void Calculate_Checksum_For_Valid_Account_Number()
+    [Theory]
+    [MemberData(nameof(AccountFileEntryLinesForChecksum))]
+    public void Calculate_Checksum_For_Valid_Account_Number(
+        string[] accountFileEntryLines,
+        bool expectedIsValid)
     {
-        string[] accountFileEntryLines =  
-        {
-            " _     _  _  _  _  _  _  _ ",
-            " _||_||_ |_||_| _||_||_ |_ ",
-            " _|  | _||_||_||_ |_||_| _|"
-        };
-
-        AccountFileEntry.Create(accountFileEntryLines).IsChecksumValid().Should().BeTrue();
+        AccountFileEntry.Create(accountFileEntryLines).IsChecksumValid().Should().Be(expectedIsValid);
     }
     
-    [Fact]
-    public void Calculate_Checksum_For_Invalid_Account_Number()
-    {
-        string[] accountFileEntryLines =  
+    public static IEnumerable<object[]> AccountFileEntryLinesForChecksum =>
+        new List<object[]>
         {
-            "                           ", 
-            "  |  |  |  |  |  |  |  |  |",
-            "  |  |  |  |  |  |  |  |  |"
+            // valid entries
+            new object[] { new[]
+            {
+                " _     _  _  _  _  _  _  _ ",
+                " _||_||_ |_||_| _||_||_ |_ ",
+                " _|  | _||_||_||_ |_||_| _|"
+            }, true },
+            new object[] { new[]
+            {
+                " _                         ",
+                "  |  |  |  |  |  |  |  |  |",
+                "  |  |  |  |  |  |  |  |  |"
+            }, true },
+            new object[] { new[]
+            {
+                "    _  _     _  _  _  _  _ ",
+                "  | _| _||_||_ |_   ||_||_|",
+                "  ||_  _|  | _||_|  ||_| _|"
+            }, true },
+            new object[] { new[]
+            {
+                "    _  _  _  _  _  _     _ ",
+                "|_||_|| ||_||_   |  |  ||_ ",
+                "  | _||_||_||_|  |  |  | _|"
+            }, true },
+            // invalid entries
+            new object[] { new[]
+            {
+                "                           ", 
+                "  |  |  |  |  |  |  |  |  |",
+                "  |  |  |  |  |  |  |  |  |"
+            }, false },
+            new object[] { new[]
+            {
+                " _  _  _  _  _  _  _  _  _ ", 
+                "|_||_||_||_||_||_||_||_||_|",
+                "|_||_||_||_||_||_||_||_||_|"
+            }, false },
+            new object[] { new[]
+            {
+                "    _  _  _  _  _  _     _ ",
+                "|_||_|| || ||_   |  |  ||_ ",
+                "  | _||_||_||_|  |  |  | _|"
+            }, false },
+            new object[] { new[]
+            {
+                " _     _  _     _  _  _  _ ",
+                "| |  | _| _||_||_ |_   ||_|",
+                "|_|  ||_  _|  | _||_|  ||_|"
+            }, false }
         };
-
-        AccountFileEntry.Create(accountFileEntryLines).IsChecksumValid().Should().BeFalse();
-    }
 }
