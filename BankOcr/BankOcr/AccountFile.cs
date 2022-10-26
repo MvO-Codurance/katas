@@ -50,4 +50,33 @@ public class AccountFile
         return result;
     }
 
+    public void CreateResultFile(string outputPath)
+    {
+        using Stream stream = File.OpenWrite(outputPath);
+        using StreamWriter writer = new StreamWriter(stream);
+        
+        try
+        {
+            foreach (var entry in Entries)
+            {
+                writer.Write($"{entry.AccountNumber}");
+            
+                if (entry.AccountNumber.Contains('?'))
+                {
+                    writer.Write(" ILL");
+                }
+                else if (!entry.IsChecksumValid())
+                {
+                    writer.Write(" ERR");
+                }
+            
+                writer.WriteLine();
+            }
+        }
+        finally
+        {
+            writer.Flush();
+            writer.Close();
+        }
+    }
 }

@@ -10,7 +10,7 @@ public class AccountFileShould
     [Fact]
     public void Read_One_Account_Number_From_A_File()
     {
-        using Stream stream = ReadEmbeddedResourceStream(@"TestData\OneAccountNumber.txt");
+        using Stream stream = TestUtils.ReadEmbeddedResourceStream(@"TestData\OneAccountNumber.txt");
         var accountFile = AccountFile.Read(stream);
 
         accountFile.Entries.Should().HaveCount(1);
@@ -20,7 +20,7 @@ public class AccountFileShould
     [Fact]
     public void Read_Two_Account_Numbers_From_A_File()
     {
-        using Stream stream = ReadEmbeddedResourceStream(@"TestData\TwoAccountNumbers.txt");
+        using Stream stream = TestUtils.ReadEmbeddedResourceStream(@"TestData\TwoAccountNumbers.txt");
         var accountFile = AccountFile.Read(stream);
 
         accountFile.Entries.Should().HaveCount(2);
@@ -31,7 +31,7 @@ public class AccountFileShould
     [Fact]
     public void Read_Multiple_Account_Numbers_From_A_File()
     {
-        using Stream stream = ReadEmbeddedResourceStream(@"TestData\MultipleAccountNumbers.txt");
+        using Stream stream = TestUtils.ReadEmbeddedResourceStream(@"TestData\MultipleAccountNumbers.txt");
         var accountFile = AccountFile.Read(stream);
 
         accountFile.Entries.Should().HaveCount(11);
@@ -48,16 +48,18 @@ public class AccountFileShould
         accountFile.Entries[10].AccountNumber.Should().BeEquivalentTo("123456789");
     }
     
-    private static Stream ReadEmbeddedResourceStream(string filePath)
+    [Fact]
+    public void Output_Result_File()
     {
-        Assembly assembly = Assembly.GetExecutingAssembly();
+        using Stream inputStream = TestUtils.ReadEmbeddedResourceStream(@"TestData\GoodBadIllegalAccountNumbers.txt");
+        var accountFile = AccountFile.Read(inputStream);
 
-        Stream? stream = new EmbeddedFileProvider(assembly).GetFileInfo(filePath)?.CreateReadStream();
-        if (stream == null)
-        {
-            throw new FileNotFoundException("Could not retrieve embedded file resource from " + assembly.FullName, filePath);
-        }
+        var outputPath = Path.GetTempFileName();
+        accountFile.CreateResultFile(outputPath);
+        
+        string expectedOutput = TestUtils.ReadEmbeddedResourceText(@"TestData\GoodBadIllegalAccountNumbers-ExpectedOutput.txt");
+        string actualOutput = File.ReadAllText(outputPath);
 
-        return stream;
+        actualOutput.Should().BeEquivalentTo(expectedOutput);
     }
 }
