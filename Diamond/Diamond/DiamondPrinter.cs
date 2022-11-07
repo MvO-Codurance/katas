@@ -22,23 +22,28 @@ public class DiamondPrinter
         }
         
         var result = new StringBuilder();
-        var indent = codeForInput - CodeForA;
-        var gap = 0;
-        var currentCode = CodeForA;
+        var indent = codeForInput - CodeForA;   // the indent is a count of space chars between the target letter and 'A'
+        var gap = 0;                            // the gap always starts at zero as 'A' is always output on it's own
+        var currentCode = CodeForA;             // we always start at 'A'
 
+        // start at 'A' and loop until we reach the target letter
         while (currentCode <= codeForInput)
         {
             result.AppendLine(GetLine(currentCode, indent, gap));
             
             currentCode++;
-            indent--;
-            gap = GetNextGap(gap);
+            indent--;               // the indent decreases by 1 for each line
+            gap = GetNextGap(gap);  // the gap increases in a pattern of odd numbers, i.e. 1, 3, 5, 7, ...
         }
         
-        currentCode -= 2;
+        // we've reached the target letter, the widest part of the diamond so now we reset
+        // we incremented past the target letter and we don't want to output the target letter again, so decrease by 2
+        currentCode -= 2;           
         indent += 2;
         gap -= 2;
         gap = GetPreviousGap(gap);
+        
+        // starting at the target letter - 1, loop until we reach 'A' again
         while (currentCode >= CodeForA)
         {
             var line = GetLine(currentCode, indent, gap);
