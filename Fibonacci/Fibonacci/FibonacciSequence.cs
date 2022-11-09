@@ -4,22 +4,35 @@ public class FibonacciSequence
 {
     public int NumberAtStep(int step)
     {
+        // c = a + b
+        // where the numbers are in sequential positions a, b, and c
+        
         if (step <= 0)
         {
             return 0;
         }
         
-        int nMinus2 = 0;
-        int nMinus1 = 1;
-        int n = 1;
+        int a = 0;
+        int b = 1;
+        int c = a + b;
 
         for (int position = 1; position < step; position++)
         {
-            n = nMinus1 + nMinus2;
-            nMinus2 = nMinus1;
-            nMinus1 = n;
+            c = a + b;
+            a = b;
+            b = c;
         }
 
-        return n;
+        return c;
+    }
+    
+    public int NumberAtStepRecursive(int step)
+    {
+        if (step is 0 or 1)  
+        {  
+            return step;  
+        }
+
+        return NumberAtStepRecursive(step - 1) + NumberAtStepRecursive(step - 2);
     }
 }
