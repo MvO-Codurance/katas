@@ -11,6 +11,7 @@ public class TaxCalculatorShould
     [InlineAutoNSubstituteData(11000.00, 11000.00)]
     [InlineAutoNSubstituteData(12000.00, 11000.00)]
     [InlineAutoNSubstituteData(45000.00, 11000.00)]
+    [InlineAutoNSubstituteData(101000.00, 10500.00)]
     public void Calculate_The_Annual_Tax_Free_Allowance(
         decimal grossAnnualSalary,
         decimal expectedTaxableIncome)
@@ -24,6 +25,7 @@ public class TaxCalculatorShould
     [InlineAutoNSubstituteData(12000.00, 1000.00)]
     [InlineAutoNSubstituteData(30000.00, 19000.00)]
     [InlineAutoNSubstituteData(45000.00, 34000.00)]
+    [InlineAutoNSubstituteData(101_000.00, 90_500.00)]
     public void Calculate_The_Annual_Taxable_Income(
         decimal grossAnnualSalary,
         decimal expectedTaxableIncome)
@@ -37,6 +39,7 @@ public class TaxCalculatorShould
     [InlineAutoNSubstituteData(12000.00, 200.00)]
     [InlineAutoNSubstituteData(30000.00, 3800.00)]
     [InlineAutoNSubstituteData(45000.00, 7200.00)]
+    [InlineAutoNSubstituteData(101_000.00, 29_800.00)]
     public void Calculate_The_Annual_Tax_Payable(
         decimal grossAnnualSalary,
         decimal expectedTaxPayable)
