@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalarySlip", "SalarySlip\Sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalarySlip.Tests", "SalarySlip.Tests\SalarySlip.Tests.csproj", "{7EAE25A0-2C98-470B-9BB4-46FAB9923E0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalarySlip.Specs", "SalarySlip.Specs\SalarySlip.Specs.csproj", "{CDE86910-1E62-438F-94AF-86DEBEEE490A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{7EAE25A0-2C98-470B-9BB4-46FAB9923E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EAE25A0-2C98-470B-9BB4-46FAB9923E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EAE25A0-2C98-470B-9BB4-46FAB9923E0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDE86910-1E62-438F-94AF-86DEBEEE490A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDE86910-1E62-438F-94AF-86DEBEEE490A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDE86910-1E62-438F-94AF-86DEBEEE490A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDE86910-1E62-438F-94AF-86DEBEEE490A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

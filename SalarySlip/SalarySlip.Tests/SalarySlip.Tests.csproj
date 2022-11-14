@@ -30,6 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\SalarySlip.Specs\SalarySlip.Specs.csproj" />
       <ProjectReference Include="..\SalarySlip\SalarySlip.csproj" />
     </ItemGroup>
 
