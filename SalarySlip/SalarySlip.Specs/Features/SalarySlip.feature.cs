@@ -94,6 +94,7 @@ namespace SalarySlip.Specs.Features
         [Xunit.InlineDataAttribute("111000", "9250.00", "462.73", "458.33", "8791.67", "2983.33", new string[0])]
         [Xunit.InlineDataAttribute("122000", "10166.67", "481.07", "0.00", "10166.67", "3533.33", new string[0])]
         [Xunit.InlineDataAttribute("150000", "12500.00", "527.73", "0.00", "12500.00", "4466.67", new string[0])]
+        [Xunit.InlineDataAttribute("160000", "13333.33", "544.40", "0.00", "13333.33", "4841.67", new string[0])]
         public virtual void GenerateASalarySlipForAnEmployeeWithDifferentTaxationElements(string gross_Salary, string monthly_Gross_Salary, string national_Insurance, string tax_Free_Allowance, string taxable_Income, string tax_Payable, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
