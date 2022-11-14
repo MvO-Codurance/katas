@@ -35,4 +35,10 @@ public class SalarySlipDefinitions
     {
         _salarySlip.NationalInsuranceContribution.Should().Be(nationalInsurance);
     }
+
+    [Then(@"tax-free allowance of £ (.*)")]
+    public void ThenTaxFreeAllowanceOf(decimal taxFreeAllowance)
+    {
+        _salarySlip.TaxFreeAllowance.Should().Be(taxFreeAllowance);
+    }
 }

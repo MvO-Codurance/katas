@@ -1,3 +1,4 @@
+using AutoFixture;
 using FluentAssertions;
 using Xunit;
 
@@ -14,16 +15,11 @@ public class SalarySlipShould
     [InlineAutoNSubstituteData(30000.00, 2500.00)]
     public void Calculate_Gross_Monthly_Salary(
         decimal grossAnnualSalary,
-        decimal expectedGrossMonthlySalary,
-        string employeeId,
-        string employeeName)
+        decimal expectedGrossMonthlySalary)
     {
-        var employee = new Employee(employeeId, employeeName, grossAnnualSalary);
-        var nationalInsurance = new NationalInsurance(grossAnnualSalary);
-
-        new SalarySlip(employee, nationalInsurance).GrossMonthlySalary.Should().Be(expectedGrossMonthlySalary);
+        GetSalarySlip(grossAnnualSalary).GrossMonthlySalary.Should().Be(expectedGrossMonthlySalary);
     }
-    
+
     [Theory]
     [InlineAutoNSubstituteData(5000.00, 0.00)]
     [InlineAutoNSubstituteData(6000.00, 0.00)]
@@ -31,15 +27,34 @@ public class SalarySlipShould
     [InlineAutoNSubstituteData(11000.00, 29.40)]
     [InlineAutoNSubstituteData(12000.00, 39.40)]
     [InlineAutoNSubstituteData(30000.00, 219.40)]
-    public void Calculate_Monthly_Nation_Insurance_Contribution(
+    public void Calculate_Monthly_National_Insurance_Contribution(
         decimal grossAnnualSalary,
-        decimal expectedMonthlyContribution,
-        string employeeId,
-        string employeeName)
+        decimal expectedMonthlyContribution)
     {
-        var employee = new Employee(employeeId, employeeName, grossAnnualSalary);
-        var nationalInsurance = new NationalInsurance(grossAnnualSalary);
+        GetSalarySlip(grossAnnualSalary).NationalInsuranceContribution.Should().Be(expectedMonthlyContribution);
+    }
 
-        new SalarySlip(employee, nationalInsurance).NationalInsuranceContribution.Should().Be(expectedMonthlyContribution);
+    [Theory]
+    [InlineAutoNSubstituteData(5000.00, 416.67)]
+    [InlineAutoNSubstituteData(6000.00, 500.00)]
+    [InlineAutoNSubstituteData(9060.00, 755.00)]
+    [InlineAutoNSubstituteData(11000.00, 916.67)]
+    [InlineAutoNSubstituteData(12000.00, 916.67)]
+    [InlineAutoNSubstituteData(30000.00, 916.67)]
+    public void Calculate_Monthly_Tax_Free_Allowance(
+        decimal grossAnnualSalary,
+        decimal expectedMonthlyAllowance)
+    {
+        GetSalarySlip(grossAnnualSalary).TaxFreeAllowance.Should().Be(expectedMonthlyAllowance);
+    }
+
+    private static SalarySlip GetSalarySlip(decimal grossAnnualSalary)
+    {
+        var fixture = new Fixture();
+        var employee = new Employee(fixture.Create<string>(), fixture.Create<string>(), grossAnnualSalary);
+        var nationalInsurance = new NationalInsurance(grossAnnualSalary);
+        var taxCalculator = new TaxCalculator(grossAnnualSalary);
+        
+        return new SalarySlip(employee, nationalInsurance, taxCalculator);
     }
 }

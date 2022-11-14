@@ -83,19 +83,22 @@ namespace SalarySlip.Specs.Features
         [Xunit.SkippableTheoryAttribute(DisplayName="Generate a salary slip for an employee with different taxation elements")]
         [Xunit.TraitAttribute("FeatureTitle", "Salary Slip")]
         [Xunit.TraitAttribute("Description", "Generate a salary slip for an employee with different taxation elements")]
-        [Xunit.InlineDataAttribute("5000", "416.67", "0.00", new string[0])]
-        [Xunit.InlineDataAttribute("6000", "500.00", "0.00", new string[0])]
-        [Xunit.InlineDataAttribute("9060", "755.00", "10.00", new string[0])]
-        [Xunit.InlineDataAttribute("11000", "916.67", "29.40", new string[0])]
-        [Xunit.InlineDataAttribute("12000", "1000.00", "39.40", new string[0])]
-        [Xunit.InlineDataAttribute("30000", "2500.00", "219.40", new string[0])]
-        public virtual void GenerateASalarySlipForAnEmployeeWithDifferentTaxationElements(string gross_Salary, string monthly_Gross_Salary, string national_Insurance, string[] exampleTags)
+        [Xunit.InlineDataAttribute("5000", "416.67", "0.00", "416.67", "0.00", "0.00", new string[0])]
+        [Xunit.InlineDataAttribute("6000", "500.00", "0.00", "500.00", "0.00", "0.00", new string[0])]
+        [Xunit.InlineDataAttribute("9060", "755.00", "10.00", "755.00", "0.00", "0.00", new string[0])]
+        [Xunit.InlineDataAttribute("11000", "916.67", "29.40", "916.67", "0.00", "0.00", new string[0])]
+        [Xunit.InlineDataAttribute("12000", "1000.00", "39.40", "916.67", "83.33", "16.67", new string[0])]
+        [Xunit.InlineDataAttribute("30000", "2500.00", "219.40", "916.67", "1583.33", "316.67", new string[0])]
+        public virtual void GenerateASalarySlipForAnEmployeeWithDifferentTaxationElements(string gross_Salary, string monthly_Gross_Salary, string national_Insurance, string tax_Free_Allowance, string taxable_Income, string tax_Payable, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("gross_salary", gross_Salary);
             argumentsOfScenario.Add("monthly_gross_salary", monthly_Gross_Salary);
             argumentsOfScenario.Add("national_insurance", national_Insurance);
+            argumentsOfScenario.Add("tax_free_allowance", tax_Free_Allowance);
+            argumentsOfScenario.Add("taxable_income", taxable_Income);
+            argumentsOfScenario.Add("tax_payable", tax_Payable);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate a salary slip for an employee with different taxation elements", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
@@ -128,6 +131,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 7
  testRunner.And(string.Format("national insurance contribution of {0}", national_Insurance), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 8
+ testRunner.And(string.Format("tax-free allowance of £ {0}", tax_Free_Allowance), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
