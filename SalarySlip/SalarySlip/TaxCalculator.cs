@@ -30,6 +30,10 @@ public class TaxCalculator
         {
             var amountToDecreaseTaxFreeAllowance = amountEarnedOverHighRateThreshold / 2;
             taxFreeAllowance -= amountToDecreaseTaxFreeAllowance;
+            if (taxFreeAllowance < 0)
+            {
+                taxFreeAllowance = 0;
+            }
         }
 
         return Math.Min(grossAnnualSalary, taxFreeAllowance);
