@@ -28,7 +28,7 @@ namespace SalarySlip.Specs.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "SalarySlipIteration1.feature"
+#line 1 "SalarySlip.feature"
 #line hidden
         
         public SalarySlipFeature(SalarySlipFeature.FixtureData fixtureData, SalarySlip_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
@@ -83,20 +83,19 @@ namespace SalarySlip.Specs.Features
         [Xunit.SkippableTheoryAttribute(DisplayName="Generate a salary slip for an employee with different taxation elements")]
         [Xunit.TraitAttribute("FeatureTitle", "Salary Slip")]
         [Xunit.TraitAttribute("Description", "Generate a salary slip for an employee with different taxation elements")]
-        [Xunit.InlineDataAttribute("5000", "416.67", new string[0])]
-        [Xunit.InlineDataAttribute("6000", "500.00", new string[0])]
-        [Xunit.InlineDataAttribute("11000", "916.67", new string[0])]
-        [Xunit.InlineDataAttribute("12000", "1000.00", new string[0])]
-        [Xunit.InlineDataAttribute("30000", "2500.00", new string[0])]
-        [Xunit.InlineDataAttribute("45000", "3750.00", new string[0])]
-        [Xunit.InlineDataAttribute("111000", "9250.00", new string[0])]
-        [Xunit.InlineDataAttribute("160000", "13333.33", new string[0])]
-        public virtual void GenerateASalarySlipForAnEmployeeWithDifferentTaxationElements(string gross_Salary, string monthly_Gross_Salary, string[] exampleTags)
+        [Xunit.InlineDataAttribute("5000", "416.67", "0.00", new string[0])]
+        [Xunit.InlineDataAttribute("6000", "500.00", "0.00", new string[0])]
+        [Xunit.InlineDataAttribute("9060", "755.00", "10.00", new string[0])]
+        [Xunit.InlineDataAttribute("11000", "916.67", "29.40", new string[0])]
+        [Xunit.InlineDataAttribute("12000", "1000.00", "39.40", new string[0])]
+        [Xunit.InlineDataAttribute("30000", "2500.00", "219.40", new string[0])]
+        public virtual void GenerateASalarySlipForAnEmployeeWithDifferentTaxationElements(string gross_Salary, string monthly_Gross_Salary, string national_Insurance, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("gross_salary", gross_Salary);
             argumentsOfScenario.Add("monthly_gross_salary", monthly_Gross_Salary);
+            argumentsOfScenario.Add("national_insurance", national_Insurance);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate a salary slip for an employee with different taxation elements", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
@@ -126,6 +125,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 6
  testRunner.Then(string.Format("the salary slip should contain a gross monthly salary of {0}", monthly_Gross_Salary), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 7
+ testRunner.And(string.Format("national insurance contribution of {0}", national_Insurance), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
