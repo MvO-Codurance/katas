@@ -6,6 +6,7 @@ public class TaxCalculator
     private const decimal MidTaxRateThreshold = 43_000.00m;
     private const decimal HighTaxRateThreshold = 150_000.00m;
     
+    private const decimal LowRateTaxFreeAllowanceThreshold = 11_000.00m;
     private const decimal HighRateTaxFreeAllowanceThreshold = 100_000.00m;
     
     private const decimal LowTaxRate = 0.20m;
@@ -25,7 +26,7 @@ public class TaxCalculator
 
     private decimal CalculateAnnualTaxFreeAllowance(decimal grossAnnualSalary)
     {
-        var taxFreeAllowance = LowTaxRateThreshold;
+        var taxFreeAllowance = LowRateTaxFreeAllowanceThreshold;
         
         // decrease tax free allowance by £1 for every £2 earned over the high threshold
         var amountEarnedOverHighRateThreshold = grossAnnualSalary - HighRateTaxFreeAllowanceThreshold;
@@ -50,30 +51,49 @@ public class TaxCalculator
 
     private decimal CalculateAnnualTaxPayable(decimal grossAnnualSalary)
     {
-        /*
-            | 0.00 >>>>>>>> | 11,000.00 >>>>>>>> | 43,000.00 >>>>>>>>
-            |       0%      |       20%          |       40%  
-        */
+        var lowRateTaxPayable = CalculateLowRateTaxPayable(grossAnnualSalary);
+        var midRateTaxPayable = CalculateMidRateTaxPayable(grossAnnualSalary);
+        var highRateTaxPayable = CalculateHighRateTaxPayable(grossAnnualSalary);
 
-        // adjust the mid rate threshold by the amount that the tax free allowance was reduced
-        // because of earnings over HighRateThreshold
-        var adjustedMidRateThreshold = MidTaxRateThreshold - (LowTaxRateThreshold - AnnualTaxFreeAllowance);
-        
-        var lowRateTaxableAmount = Math.Max(
-            Math.Min(grossAnnualSalary, adjustedMidRateThreshold) - AnnualTaxFreeAllowance,
-            0.00m);
-        var lowRateTaxPayable = lowRateTaxableAmount * LowTaxRate;
-
-        var midRateTaxableAmount = Math.Max(
-            Math.Min(grossAnnualSalary, HighTaxRateThreshold) - adjustedMidRateThreshold,
-            0.00m);
-        var midRateTaxPayable = midRateTaxableAmount * MidTaxRate;
-        
-        var highRateTaxableAmount = Math.Max(
-            grossAnnualSalary - HighTaxRateThreshold,
-            0.00m);
-        var highRateTaxPayable = highRateTaxableAmount * HighTaxRate;
-        
         return lowRateTaxPayable + midRateTaxPayable + highRateTaxPayable;
+    }
+
+    private decimal CalculateLowRateTaxPayable(decimal grossAnnualSalary)
+    {
+        decimal taxPayable = 0;
+        if (grossAnnualSalary <= LowTaxRateThreshold) return taxPayable;
+        
+        var taxFreeDifference = LowRateTaxFreeAllowanceThreshold - AnnualTaxFreeAllowance;
+        var taxableAmount = Math.Min(grossAnnualSalary, MidTaxRateThreshold);
+        taxableAmount = taxableAmount - AnnualTaxFreeAllowance - taxFreeDifference;
+        taxPayable = taxableAmount * LowTaxRate;
+
+        return taxPayable;
+    }
+
+    private decimal CalculateMidRateTaxPayable(decimal grossAnnualSalary)
+    {
+        decimal taxPayable = 0;
+        if (grossAnnualSalary <= MidTaxRateThreshold) return taxPayable;
+        
+        var taxFreeDifference = LowRateTaxFreeAllowanceThreshold - AnnualTaxFreeAllowance;
+        var taxableAmount = Math.Min(grossAnnualSalary, HighTaxRateThreshold);
+        taxableAmount -= MidTaxRateThreshold;
+        taxableAmount += taxFreeDifference;
+        
+        taxPayable = taxableAmount * MidTaxRate;
+        
+        return taxPayable;
+    }
+
+    private decimal CalculateHighRateTaxPayable(decimal grossAnnualSalary)
+    {
+        decimal taxPayable = 0;
+        if (grossAnnualSalary <= HighTaxRateThreshold) return taxPayable;
+        
+        var taxableAmount = grossAnnualSalary - HighTaxRateThreshold;
+        taxPayable = taxableAmount * HighTaxRate;
+        
+        return taxPayable;
     }
 }
