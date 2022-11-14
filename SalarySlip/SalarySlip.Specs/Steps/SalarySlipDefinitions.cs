@@ -41,4 +41,10 @@ public class SalarySlipDefinitions
     {
         _salarySlip.TaxFreeAllowance.Should().Be(taxFreeAllowance);
     }
+
+    [Then(@"taxable income of £ (.*)")]
+    public void ThenTaxableIncomeOf(decimal taxableIncome)
+    {
+        _salarySlip.TaxableIncome.Should().Be(taxableIncome);
+    }
 }

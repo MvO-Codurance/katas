@@ -47,6 +47,18 @@ public class SalarySlipShould
     {
         GetSalarySlip(grossAnnualSalary).TaxFreeAllowance.Should().Be(expectedMonthlyAllowance);
     }
+    
+    [Theory]
+    [InlineAutoNSubstituteData(5000.00, 0.00)]
+    [InlineAutoNSubstituteData(11000.00, 0.00)]
+    [InlineAutoNSubstituteData(12000.00, 83.33)]
+    [InlineAutoNSubstituteData(30000.00, 1583.33)]
+    public void Calculate_Monthly_Taxable_Income(
+        decimal grossAnnualSalary,
+        decimal expectedMonthlyTaxableIncome)
+    {
+        GetSalarySlip(grossAnnualSalary).TaxableIncome.Should().Be(expectedMonthlyTaxableIncome);
+    }
 
     private static SalarySlip GetSalarySlip(decimal grossAnnualSalary)
     {

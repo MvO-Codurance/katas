@@ -135,6 +135,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
  testRunner.And(string.Format("tax-free allowance of £ {0}", tax_Free_Allowance), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+#line 9
+ testRunner.And(string.Format("taxable income of £ {0}", taxable_Income), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

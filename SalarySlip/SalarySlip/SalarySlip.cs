@@ -10,7 +10,8 @@ public class SalarySlip
     public string Name => _employee.Name;
     public decimal GrossMonthlySalary => ToMonthlyCurrency(_employee.GrossAnnualSalary);
     public decimal NationalInsuranceContribution => ToMonthlyCurrency(_nationalInsurance.AnnualContribution);
-    public decimal TaxFreeAllowance => ToMonthlyCurrency(_taxCalculator.AnnualTaxFreeAllowance); 
+    public decimal TaxFreeAllowance => ToMonthlyCurrency(_taxCalculator.AnnualTaxFreeAllowance);
+    public object TaxableIncome => ToMonthlyCurrency(_taxCalculator.AnnualTaxableIncome);
 
     public SalarySlip(
         Employee employee, 

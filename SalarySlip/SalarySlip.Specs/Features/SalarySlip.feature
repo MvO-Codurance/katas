@@ -6,7 +6,7 @@ Scenario: Generate a salary slip for an employee with different taxation element
 	Then the salary slip should contain a gross monthly salary of <monthly_gross_salary>
 	And national insurance contribution of <national_insurance>
 	And tax-free allowance of £ <tax_free_allowance>
-#	And taxable income of £ <taxable_income>
+	And taxable income of £ <taxable_income>
 #	And tax payable of £ <tax_payable>
 	
 	Examples:
