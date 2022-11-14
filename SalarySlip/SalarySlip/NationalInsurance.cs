@@ -17,21 +17,31 @@ public class NationalInsurance
     
     private static decimal CalculateAnnualContribution(decimal grossAnnualSalary)
     {
-        /*
-            | 0.00 >>>>>>>> | 8,060.00 >>>>>>>> | 43,000.00 >>>>>>>>
-            |       0%      |       20%         |       2%  
-        */
-        
-        var lowRateAmount = Math.Max(
-            Math.Min(grossAnnualSalary, HighRateThreshold) - LowRateThreshold,
-            0.00m);
-        var lowRatePayable = lowRateAmount * LowRate;
-
-        var highRateAmount = Math.Max(
-            grossAnnualSalary - HighRateThreshold,
-            0.00m);
-        var highRatePayable = highRateAmount * HighRate;
+        var lowRatePayable = CalculateLowRatePayable(grossAnnualSalary);
+        var highRatePayable = CalculateHighRatePayable(grossAnnualSalary);
 
         return lowRatePayable + highRatePayable;
+    }
+
+    private static decimal CalculateLowRatePayable(decimal grossAnnualSalary)
+    {
+        decimal taxPayable = 0;
+        if (grossAnnualSalary <= LowRateThreshold) return taxPayable;
+        
+        var taxableAmount = Math.Min(grossAnnualSalary, HighRateThreshold) - LowRateThreshold;
+        taxPayable = taxableAmount * LowRate;
+        
+        return taxPayable;
+    }
+
+    private static decimal CalculateHighRatePayable(decimal grossAnnualSalary)
+    {
+        decimal taxPayable = 0;
+        if (grossAnnualSalary <= HighRateThreshold) return taxPayable;
+        
+        var taxableAmount = grossAnnualSalary - HighRateThreshold;
+        taxPayable = taxableAmount * HighRate;
+        
+        return taxPayable;
     }
 }
