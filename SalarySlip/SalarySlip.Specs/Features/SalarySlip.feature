@@ -7,7 +7,7 @@ Scenario: Generate a salary slip for an employee with different taxation element
 	And national insurance contribution of <national_insurance>
 	And tax-free allowance of £ <tax_free_allowance>
 	And taxable income of £ <taxable_income>
-#	And tax payable of £ <tax_payable>
+	And tax payable of £ <tax_payable>
 	
 	Examples:
 	  | gross_salary | monthly_gross_salary | national_insurance | tax_free_allowance | taxable_income | tax_payable |

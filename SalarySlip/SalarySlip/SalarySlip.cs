@@ -11,7 +11,8 @@ public class SalarySlip
     public decimal GrossMonthlySalary => ToMonthlyCurrency(_employee.GrossAnnualSalary);
     public decimal NationalInsuranceContribution => ToMonthlyCurrency(_nationalInsurance.AnnualContribution);
     public decimal TaxFreeAllowance => ToMonthlyCurrency(_taxCalculator.AnnualTaxFreeAllowance);
-    public object TaxableIncome => ToMonthlyCurrency(_taxCalculator.AnnualTaxableIncome);
+    public decimal TaxableIncome => ToMonthlyCurrency(_taxCalculator.AnnualTaxableIncome);
+    public decimal TaxPayable => ToMonthlyCurrency(_taxCalculator.AnnualTaxPayable);
 
     public SalarySlip(
         Employee employee, 

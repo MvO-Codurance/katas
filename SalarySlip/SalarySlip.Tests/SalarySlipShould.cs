@@ -59,6 +59,18 @@ public class SalarySlipShould
     {
         GetSalarySlip(grossAnnualSalary).TaxableIncome.Should().Be(expectedMonthlyTaxableIncome);
     }
+    
+    [Theory]
+    [InlineAutoNSubstituteData(5000.00, 0.00)]
+    [InlineAutoNSubstituteData(11000.00, 0.00)]
+    [InlineAutoNSubstituteData(12000.00, 16.67)]
+    [InlineAutoNSubstituteData(30000.00, 316.67)]
+    public void Calculate_Monthly_Tax_Payable(
+        decimal grossAnnualSalary,
+        decimal expectedMonthlyTaxPayable)
+    {
+        GetSalarySlip(grossAnnualSalary).TaxPayable.Should().Be(expectedMonthlyTaxPayable);
+    }
 
     private static SalarySlip GetSalarySlip(decimal grossAnnualSalary)
     {

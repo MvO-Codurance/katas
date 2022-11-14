@@ -14,9 +14,9 @@ public class NationalInsuranceShould
     }
     
     [Theory]
-    [InlineAutoNSubstituteData(11000.00, 29.40 * 12)]
-    [InlineAutoNSubstituteData(12000.00, 39.40 * 12)]
-    [InlineAutoNSubstituteData(30000.00, 219.40 * 12)]
+    [InlineAutoNSubstituteData(11000.00, 352.80)]
+    [InlineAutoNSubstituteData(12000.00, 472.80)]
+    [InlineAutoNSubstituteData(30000.00, 2632.80)]
     public void Calculate_The_Correct_Annual_Contribution_On_Salaries_Above_8060_00(
         decimal grossAnnualSalary,
         decimal expectedAnnualContribution)

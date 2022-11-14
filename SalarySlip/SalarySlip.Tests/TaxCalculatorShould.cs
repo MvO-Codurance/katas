@@ -28,4 +28,16 @@ public class TaxCalculatorShould
     {
         new TaxCalculator(grossAnnualSalary).AnnualTaxableIncome.Should().Be(expectedTaxableIncome);
     }
+    
+    [Theory]
+    [InlineAutoNSubstituteData(5000.00, 0.00)]
+    [InlineAutoNSubstituteData(11000.00, 0.00)]
+    [InlineAutoNSubstituteData(12000.00, 200.00)]
+    [InlineAutoNSubstituteData(30000.00, 3800.00)]
+    public void Calculate_The_Annual_Tax_Payable(
+        decimal grossAnnualSalary,
+        decimal expectedTaxPayable)
+    {
+        new TaxCalculator(grossAnnualSalary).AnnualTaxPayable.Should().Be(expectedTaxPayable);
+    }
 }
