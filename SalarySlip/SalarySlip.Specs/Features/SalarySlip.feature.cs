@@ -19,7 +19,7 @@ namespace SalarySlip.Specs.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class SalarySlipIteration1Feature : object, Xunit.IClassFixture<SalarySlipIteration1Feature.FixtureData>, System.IDisposable
+    public partial class SalarySlipFeature : object, Xunit.IClassFixture<SalarySlipFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace SalarySlip.Specs.Features
 #line 1 "SalarySlipIteration1.feature"
 #line hidden
         
-        public SalarySlipIteration1Feature(SalarySlipIteration1Feature.FixtureData fixtureData, SalarySlip_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public SalarySlipFeature(SalarySlipFeature.FixtureData fixtureData, SalarySlip_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace SalarySlip.Specs.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Salary Slip Iteration 1", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Salary Slip", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,17 +80,24 @@ namespace SalarySlip.Specs.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Calculate the gross monthly salary of an employee with a gross annual salary of £" +
-            "5000.00")]
-        [Xunit.TraitAttribute("FeatureTitle", "Salary Slip Iteration 1")]
-        [Xunit.TraitAttribute("Description", "Calculate the gross monthly salary of an employee with a gross annual salary of £" +
-            "5000.00")]
-        public virtual void CalculateTheGrossMonthlySalaryOfAnEmployeeWithAGrossAnnualSalaryOf5000_00()
+        [Xunit.SkippableTheoryAttribute(DisplayName="Generate a salary slip for an employee with different taxation elements")]
+        [Xunit.TraitAttribute("FeatureTitle", "Salary Slip")]
+        [Xunit.TraitAttribute("Description", "Generate a salary slip for an employee with different taxation elements")]
+        [Xunit.InlineDataAttribute("5000", "416.67", new string[0])]
+        [Xunit.InlineDataAttribute("6000", "500.00", new string[0])]
+        [Xunit.InlineDataAttribute("11000", "916.67", new string[0])]
+        [Xunit.InlineDataAttribute("12000", "1000.00", new string[0])]
+        [Xunit.InlineDataAttribute("30000", "2500.00", new string[0])]
+        [Xunit.InlineDataAttribute("45000", "3750.00", new string[0])]
+        [Xunit.InlineDataAttribute("111000", "9250.00", new string[0])]
+        [Xunit.InlineDataAttribute("160000", "13333.33", new string[0])]
+        public virtual void GenerateASalarySlipForAnEmployeeWithDifferentTaxationElements(string gross_Salary, string monthly_Gross_Salary, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate the gross monthly salary of an employee with a gross annual salary of £" +
-                    "5000.00", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            argumentsOfScenario.Add("gross_salary", gross_Salary);
+            argumentsOfScenario.Add("monthly_gross_salary", monthly_Gross_Salary);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate a salary slip for an employee with different taxation elements", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -112,13 +119,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
- testRunner.Given("an employee with a gross annual salary of 5000.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("an employee with a gross annual salary of {0}", gross_Salary), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
  testRunner.When("we generate a salary slip for the employee", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 6
- testRunner.Then("the salary slip should contain a gross monthly salary of 416.67", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("the salary slip should contain a gross monthly salary of {0}", monthly_Gross_Salary), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -131,12 +138,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                SalarySlipIteration1Feature.FeatureSetup();
+                SalarySlipFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                SalarySlipIteration1Feature.FeatureTearDown();
+                SalarySlipFeature.FeatureTearDown();
             }
         }
     }
