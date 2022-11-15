@@ -1,24 +1,34 @@
+using FluentAssertions;
+using MessyDeliveryOffice.Models;
+
 namespace MessyDeliveryOffice.Specs.Steps;
 
 [Binding]
 public class DeliveryDateServiceStepDefinitions
 {
-    [Given(@"the id of a customer order")]
-    public void GivenTheIdOfACustomerOrder()
+    private Order _order;
+    
+    [Given(@"the id of a customer order with date (.*)")]
+    public void GivenTheIdOfACustomerOrderWithDate(DateOnly orderDate)
     {
-        ScenarioContext.StepIsPending();
+        _order = new Order
+        {
+            Id = Guid.NewGuid(),
+            OrderDate = orderDate
+        };
     }
 
     [When(@"we ask for the estimated dispatch date for the order")]
     public void WhenWeAskForTheEstimatedDispatchDateForTheOrder()
     {
-        ScenarioContext.StepIsPending();
+        var service = new DispatchDateService();
+        _order.EstimatedDispatchDate = service.DispatchDate(_order);
     }
 
-    [Then(@"the result should be the estimated dispatch date for the order")]
-    public void ThenTheResultShouldBeTheEstimatedDispatchDateForTheOrder()
+    [Then(@"the result should be the (.*) for the order")]
+    public void ThenTheResultShouldBeTheForTheOrder(DateOnly estimatedDispatchDate)
     {
-        ScenarioContext.StepIsPending();
+        _order.EstimatedDispatchDate.Should().Be(estimatedDispatchDate);
     }
 
     [When(@"the order is received by the supplier")]

@@ -109,13 +109,13 @@ namespace MessyDeliveryOffice.Specs.Features
             {
                 this.ScenarioStart();
 #line 4
-  testRunner.Given("the id of a customer order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("the id of a customer order with date <order_date>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
   testRunner.When("we ask for the estimated dispatch date for the order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 6
-  testRunner.Then("the result should be the estimated dispatch date for the order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the result should be the <estimated_dispatch_date> for the order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -150,7 +150,7 @@ namespace MessyDeliveryOffice.Specs.Features
             {
                 this.ScenarioStart();
 #line 10
-  testRunner.Given("the id of a customer order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("the id of a customer order with date <order_date>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 11
   testRunner.When("the order is received by the supplier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -194,7 +194,7 @@ namespace MessyDeliveryOffice.Specs.Features
             {
                 this.ScenarioStart();
 #line 16
-  testRunner.Given("the id of a customer order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("the id of a customer order with date <order_date>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 17
   testRunner.And("a product that the supplier supplies that has a lead time of <lead_time> days", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -244,7 +244,7 @@ namespace MessyDeliveryOffice.Specs.Features
             {
                 this.ScenarioStart();
 #line 24
-  testRunner.Given("the id of a customer order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("the id of a customer order with date <order_date>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 25
   testRunner.And("a product that the supplier supplies that has a lead time of <lead_time> days", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -295,7 +295,7 @@ namespace MessyDeliveryOffice.Specs.Features
             {
                 this.ScenarioStart();
 #line 32
-  testRunner.Given("the id of a customer order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("the id of a customer order with date <order_date>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 33
   testRunner.And("the day of the week is a weekday", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -342,7 +342,7 @@ namespace MessyDeliveryOffice.Specs.Features
             {
                 this.ScenarioStart();
 #line 38
-  testRunner.Given("the id of a customer order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("the id of a customer order with date <order_date>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 39
   testRunner.And("the day of the week is a weekend", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
