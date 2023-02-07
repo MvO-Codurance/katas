@@ -2,7 +2,7 @@ namespace TwoSum;
 
 public class TwoSumCalculator
 {
-    public long[] Calculate(long[] input, long target)
+    public int[] Calculate(int[] input, int target)
     {
         for (int firstIndex = 0; firstIndex < input.Length; firstIndex++)
         {
@@ -12,12 +12,12 @@ public class TwoSumCalculator
                 {
                     if (input[firstIndex] + input[secondIndex] == target)
                     {
-                        return new long[] { firstIndex, secondIndex };
+                        return new [] { firstIndex, secondIndex };
                     }
                 }
             }
         }
 
-        return new long[] { };
+        return new int[] { };
     }
 }
