@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "driving-license"
+version = "0.1.0"
+description = ""
+authors = ["Mike van Oorschot <michael.oorschot@codurance.com>"]
+readme = "README.md"
+packages = [{include = "driving_license"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
