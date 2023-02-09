@@ -8,6 +8,7 @@ packages = [{include = "driving_license"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pytest = "^7.2.1"
 
 
 [build-system]

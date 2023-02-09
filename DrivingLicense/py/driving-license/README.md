@@ -34,3 +34,12 @@ Where the elements are as follows:
 3 = Date of Birth (In the format Day Month Year, this could include the full Month name or just shorthand ie September or Sep)
 4 = M-Male or F-Female
 ```
+
+## Examples
+`["John", "James", "Smith", "01-Jan-2000", "M"]` should return `SMITH001010JJ9AA`
+
+`["Jonny", "Jimmy", "Smithson", "01-Jan-2000", "M"]` should return `SMITH001010JJ9AA`
+    
+`["Johanna", "", "Gibbs", "13-Dec-1981", "F"]` should return `GIBBS862131J99AA`
+
+`["Dave", "", "Doh", "13-Nov-1976", "M"]` should return `DOH99711136D99AA`
