@@ -14,7 +14,7 @@ data4 = ["Dave", "", "Doh", "13-Nov-1976", "M"]
     pytest.param(data3, 'GIBBS862131J99AA'),
     pytest.param(data4, 'DOH99711136D99AA')
 ])
-def test_should_return_fullly_generator_license_number(
+def test_should_return_fully_generator_license_number(
     data: list,
     expected: str
 ):

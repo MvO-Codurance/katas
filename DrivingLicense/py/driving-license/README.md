@@ -50,6 +50,7 @@ Where the elements are as follows:
 ## Running the tests
 ```
 poetry shell
+poetry install
 pytest
 ```
 
