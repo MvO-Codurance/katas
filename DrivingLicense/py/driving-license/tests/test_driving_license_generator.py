@@ -28,7 +28,7 @@ def test_should_return_chars_1_to_5_from_surname_right_padded_with_9s(
     pytest.param(data3, '8'),
     pytest.param(data4, '7')
 ])
-def test_should_return_char_6_as_decade_digit_from_year_of_birth(
+def test_should_return_char_6_as_decade_digit_from_date_of_birth(
     data: list,
     expected: str
 ):
@@ -42,7 +42,7 @@ def test_should_return_char_6_as_decade_digit_from_year_of_birth(
     pytest.param(data3, '62'),
     pytest.param(data4, '11')
 ])
-def test_should_return_chars_7_to_8_as_month_digits_date_of_birth(
+def test_should_return_chars_7_to_8_as_month_digits_from_date_of_birth(
     data: list,
     expected: str
 ):
@@ -62,3 +62,31 @@ def test_should_return_chars_9_to_10_as_day_of_month_digits_from_date_of_birth(
 ):
     actual = DrivingLicenseGenerator().generate(data)
     assert actual[8:10] == expected
+
+
+@pytest.mark.parametrize('data, expected', [
+    pytest.param(data1, '0'),
+    pytest.param(data2, '0'),
+    pytest.param(data3, '1'),
+    pytest.param(data4, '6')
+])
+def test_should_return_char_11_as_year_digit_from_date_of_birth(
+    data: list,
+    expected: str
+):
+    actual = DrivingLicenseGenerator().generate(data)
+    assert actual[10] == expected
+
+
+@pytest.mark.parametrize('data, expected', [
+    pytest.param(data1, 'JJ'),
+    pytest.param(data2, 'JJ'),
+    pytest.param(data3, 'J9'),
+    pytest.param(data4, 'D9')
+])
+def test_should_return_chars_12_to_13_as_first_initial_of_firstname_and_middlename_or_9(
+    data: list,
+    expected: str
+):
+    actual = DrivingLicenseGenerator().generate(data)
+    assert actual[11:13] == expected
