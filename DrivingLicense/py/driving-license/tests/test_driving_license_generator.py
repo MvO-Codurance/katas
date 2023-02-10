@@ -34,3 +34,17 @@ def test_should_return_char_6_as_decade_digit_from_year_of_birth(
 ):
     actual = DrivingLicenseGenerator().generate(data)
     assert actual[5] == expected
+
+
+@pytest.mark.parametrize('data, expected', [
+    pytest.param(data1, '01'),
+    pytest.param(data2, '01'),
+    pytest.param(data3, '62'),
+    pytest.param(data4, '11')
+])
+def test_should_return_char_7_to_8_as_month_digits_from_month_of_birth(
+    data: list,
+    expected: str
+):
+    actual = DrivingLicenseGenerator().generate(data)
+    assert actual[6:8] == expected
