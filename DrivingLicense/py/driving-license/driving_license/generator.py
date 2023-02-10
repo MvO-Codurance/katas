@@ -9,7 +9,8 @@ class DrivingLicenseGenerator():
             f"{self.__format_birth_month(model)}" \
             f"{self.__format_birth_day_of_month(model)}" \
             f"{self.__format_birth_year(model)}" \
-            f"{self.__format_initials(model)}"
+            f"{self.__format_initials(model)}" \
+            "9AA"
 
     def __format_surname(self, model: DrivingLicenseData) -> str:
         return model.surname.upper()[:5].ljust(5, '9')

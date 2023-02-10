@@ -9,6 +9,20 @@ data4 = ["Dave", "", "Doh", "13-Nov-1976", "M"]
 
 
 @pytest.mark.parametrize('data, expected', [
+    pytest.param(data1, 'SMITH001010JJ9AA'),
+    pytest.param(data2, 'SMITH001010JJ9AA'),
+    pytest.param(data3, 'GIBBS862131J99AA'),
+    pytest.param(data4, 'DOH99711136D99AA')
+])
+def test_should_return_fullly_generator_license_number(
+    data: list,
+    expected: str
+):
+    actual = DrivingLicenseGenerator().generate(data)
+    assert actual == expected
+
+
+@pytest.mark.parametrize('data, expected', [
     pytest.param(data1, 'SMITH'),
     pytest.param(data2, 'SMITH'),
     pytest.param(data3, 'GIBBS'),
@@ -90,3 +104,17 @@ def test_should_return_chars_12_to_13_as_first_initial_of_firstname_and_middlena
 ):
     actual = DrivingLicenseGenerator().generate(data)
     assert actual[11:13] == expected
+
+
+@pytest.mark.parametrize('data, expected', [
+    pytest.param(data1, '9AA'),
+    pytest.param(data2, '9AA'),
+    pytest.param(data3, '9AA'),
+    pytest.param(data4, '9AA')
+])
+def test_should_return_chars_14_to_16_fixed_as_9AA(
+    data: list,
+    expected: str
+):
+    actual = DrivingLicenseGenerator().generate(data)
+    assert actual[13:17] == expected
