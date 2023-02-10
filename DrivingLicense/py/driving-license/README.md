@@ -1,6 +1,8 @@
 # UK Driving Licence
 
-Details here: https://www.codewars.com/kata/586a1af1c66d18ad81000134/train/python
+Original here: https://www.codewars.com/kata/586a1af1c66d18ad81000134/train/python
+
+Sample solution here: https://github.com/ambersariya/katas/tree/main/driving-licence
 
 ## Rules
 ```
