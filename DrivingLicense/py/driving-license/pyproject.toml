@@ -3,7 +3,6 @@ name = "driving-license"
 version = "0.1.0"
 description = ""
 authors = ["Mike van Oorschot <michael.oorschot@codurance.com>"]
-readme = "README.md"
 packages = [{include = "driving_license"}]
 
 [tool.poetry.dependencies]

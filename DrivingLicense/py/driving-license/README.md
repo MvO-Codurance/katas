@@ -85,3 +85,16 @@ The response should be:
     "license": "SMITH001010JJ9AA"
 }
 ```
+
+
+## Building the Docker image
+- Install and run Docker Desktop
+- Open a prompt to the `driving-license` folder (where the `Dockerfile` file is)
+- To build the image: `docker build -t driving_license_generator .`
+- To check the build was succuessful: `docker run driving_license_generator cat app.py` should print the `app.py` file
+
+To run the app in a docker container:
+- If you ran the application in dev above, ensure you close down that instance as that is also on port 8000
+- To list available images: `docker images`
+- To run the container: `docker run -p 8000:8000 driving_license_generator`
+- Send the same request again as defined above
