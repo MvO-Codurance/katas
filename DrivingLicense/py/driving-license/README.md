@@ -45,3 +45,43 @@ Where the elements are as follows:
 `["Johanna", "", "Gibbs", "13-Dec-1981", "F"]` should return `GIBBS862131J99AA`
 
 `["Dave", "", "Doh", "13-Nov-1976", "M"]` should return `DOH99711136D99AA`
+
+
+## Running the tests
+```
+poetry shell
+pytest
+```
+
+
+## Running the app
+Uses FastAPI framework and uvicorn web server.
+
+To run in dev with hot-reload: 
+```
+poetry shell
+uvicorn app:driving_license_app --reload
+```
+Then navigate to `http://127.0.0.1:8000` to see "Hello World".
+
+To post to the `/license` endpoint:
+- Open Postman (or a similar tool)
+- Create a new POST request to `http://127.0.0.1:8000/license`
+- Set the body type to be JSON (i.e. the `content-type` request header should be `application/json`)
+- Set the body content to:
+```
+{
+    "forename": "John",
+    "middle_name": "James",
+    "surname": "Smith",
+    "date_of_birth": "01-Jan-2000",
+    "gender": "M"
+}
+```
+
+The response should be:
+```
+{
+    "license": "SMITH001010JJ9AA"
+}
+```
