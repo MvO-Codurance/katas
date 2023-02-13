@@ -4,7 +4,7 @@ from password_validation.basic_password_validator import validate
 
 
 @pytest.mark.parametrize('password, expected, reason', [
-    pytest.param("Password", False, 'is < 9 characters'),
+    pytest.param("Pwd_1", False, 'is < 9 characters'),
     pytest.param("password_1", False, 'does not have uppercase'),
     pytest.param("PASSWORD_1", False, 'does not have lowercase'),
     pytest.param("Password_x", False, 'does not have number'),
