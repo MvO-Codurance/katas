@@ -19,7 +19,7 @@ public class PasswordValidatorBuilderShould
     }
     
     [Theory]
-    [InlineAutoMoqData("Ab1_xxxxx", true, "password is 9 characters in length")]
+    [InlineAutoMoqData("Ab1_xxxxx", true, "password is >= 9 characters, has uppercase, has lowercase, has number, has underscore")]
     [InlineAutoMoqData("Ab1_", false, "password is < 9 characters in length")]
     [InlineAutoMoqData("ab1_xxxxx", false, "password does not contain an uppercase character")]
     [InlineAutoMoqData("AB1_XXXXX", false, "password does not contain an lowercase character")]
@@ -39,7 +39,7 @@ public class PasswordValidatorBuilderShould
     }
     
     [Theory]
-    [InlineAutoMoqData("Ab1_xxx", true, "password is 7 characters in length")]
+    [InlineAutoMoqData("Ab1_xxx", true, "password is >= 7 characters, has uppercase, has lowercase, has number")]
     [InlineAutoMoqData("Ab1_", false, "password is < 7 characters in length")]
     [InlineAutoMoqData("ab1_xxx", false, "password does not contain an uppercase character")]
     [InlineAutoMoqData("AB1_XXX", false, "password does not contain an lowercase character")]
@@ -57,7 +57,7 @@ public class PasswordValidatorBuilderShould
     }
     
     [Theory]
-    [InlineAutoMoqData("Ab1_xxxxxxxxxxxxx", true, "password is 17 characters in length")]
+    [InlineAutoMoqData("Ab1_xxxxxxxxxxxxx", true, "password is >= 17 characters, has uppercase, has lowercase, has underscore")]
     [InlineAutoMoqData("Ab1_", false, "password is < 17 characters in length")]
     [InlineAutoMoqData("ab1_xxxxxxxxxxxxx", false, "password does not contain an uppercase character")]
     [InlineAutoMoqData("AB1_XXXXXXXXXXXXX", false, "password does not contain an lowercase character")]
@@ -65,7 +65,7 @@ public class PasswordValidatorBuilderShould
     public void BuildAValidatorToCorrectlyValidateIteration2BPasswords(string password, bool expectedValidity, string reason)
     {
         CompositePasswordValidator validator = new PasswordValidatorBuilder()
-            .Add(new LengthPasswordValidator(7))
+            .Add(new LengthPasswordValidator(17))
             .Add(new UppercasePasswordValidator())
             .Add(new LowercasePasswordValidator())
             .Add(new UnderscorePasswordValidator())
