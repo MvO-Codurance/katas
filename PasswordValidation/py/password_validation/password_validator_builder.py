@@ -3,8 +3,8 @@ from password_validation.flexible_password_validator import PasswordValidator
 
 
 class PasswordValidatorBuilder:
-
-    __validators: list = []
+    def __init__(self):
+        self.__validators: list = []
 
     def add(self, validator: PasswordValidator):
         self.__validators.append(validator)
