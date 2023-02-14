@@ -13,7 +13,7 @@ def test_return_a_composite_password_validator_from_build():
 
 def test_return_the_password_validator_builder_from_add():
     builder = PasswordValidatorBuilder()
-    assert builder.add(AlwaysTruePasswordValidator()) == builder
+    assert builder.add(AlwaysTruePasswordValidator()) is builder
 
 
 @pytest.mark.parametrize('password, expected, reason', [
